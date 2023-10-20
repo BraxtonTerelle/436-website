@@ -1,6 +1,95 @@
+.detailRow {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.bookButton {
+  width: 175px;
+  height: 50px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.confirmBookingContainer {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 3px;
+}
+
+.confirmBookingSection {
+  width: 97%;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.calendarContainer {
+  width: 100%;
+  border-bottom: 2px solid white;
+}
+
+.hairItem {
+  width: 325px;
+  height: 100px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+#leftHairOptions {
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
+  padding-right: 20px;
+  flex-direction: column;
+}
+#rightHairOptions {
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 20px;
+  flex-direction: column;
+}
+
+.bookContainer {
+  width: 100%;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  display: flex;
+  border-bottom: 2px solid white;
+}
+
 .homeContainer {
   background-color: lightskyblue;
   overflow-y: auto;
   width: 100%;
   min-height: 100vh;
+}
+
+.titleContainer {
+  height: 4vh;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: cursive;
+  background-color: white;
+}
+
+h1 {
+  font-size: 36px;
+  color: lightskyblue;
 }
