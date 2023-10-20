@@ -1,0 +1,31 @@
+.navContainer {
+  border-radius: 150px;
+  overflow: hidden;
+  position: absolute;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  top: 30px;
+  right: 50px;
+}
+
+.navButton {
+  width: 150px;
+  border: 0px;
+  background-color: lightseagreen;
+}
+
+.selectedNavButton {
+  width: 150px;
+  border: 0px;
+  font-weight: bold;
+  background-color: darkcyan;
+}
+
+.navButton:hover {
+  width: 150px;
+  border: 0px;
+  font-weight: bold;
+  background-color: darkcyan;
+  cursor: pointer;
+}
