@@ -1,50 +1,28 @@
 import logo from "../images/logo.svg";
 import { useState, useEffect } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../styles/App.css";
-import navBar from "../components/navigationBar.js";
-import AboutPage from "./about.js";
-
+import Layout from "../pages/Layout.js";
+import HomePage from "../pages/Home.js";
+import ServicesPage from "../pages/Services.js";
+import AboutPage from "../pages/About.js";
+import ErrorPage from "../pages/Error.js";
+import loader from "../components/loader.js";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(null);
-  var homePage, defaultPage;
-  // Show loading symbol until useEffect initializes and we set current
-  // page to homePage. Eventually we'll have a top menu that upon clicking
-  // on a page name we'll call setCurrentPage to update the view, or just use
-  // React Router
-
-  useEffect(() => {
-    setCurrentPage(homePage);
-  }, []);
-
-  function defaultPage() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/Home.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-
-  const aboutPage = <AboutPage />; // about page
-
-  function homePage() {
-    return <div className="homeContainer">{navBar}</div>;
-  }
-
-  return currentPage;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

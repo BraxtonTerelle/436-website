@@ -1,17 +1,24 @@
 import "./navigationBar.css";
-
+import { Link } from "react-router-dom";
+// Helper function that deselects a menu button specified by
+// its button id
 function deselectNavButton(buttonId) {
   var button = document.getElementById(buttonId);
   button.className = "navButton";
 }
 
+// Helper function that selects a menu button specified by its
+// button id
 function selectNavButton(buttonId) {
   var button = document.getElementById(buttonId);
   button.className = "selectedNavButton";
 }
 
-function updateNavButtons(buttonId) {
-  switch (buttonId) {
+// Based on which button was pressed, select that menu nav
+// button and deselect all others since they may have been
+// previously pressed
+function updateNavButtons(buttonName) {
+  switch (buttonName) {
     case "Home":
       selectNavButton("homeButton");
       deselectNavButton("servicesButton");
@@ -30,35 +37,43 @@ function updateNavButtons(buttonId) {
   }
 }
 
+// This component returns a an absolutely positioned div
+// that represents the navigation bar for the website
 const navigationBar = (
   <div className="navContainer">
-    <button
-      id="homeButton"
-      className="navButton"
-      onClick={() => {
-        updateNavButtons("Home");
-      }}
-    >
-      Home
-    </button>
-    <button
-      id="servicesButton"
-      className="navButton"
-      onClick={() => {
-        updateNavButtons("Services");
-      }}
-    >
-      Services
-    </button>
-    <button
-      id="aboutButton"
-      className="navButton"
-      onClick={() => {
-        updateNavButtons("About");
-      }}
-    >
-      About
-    </button>
+    <Link to="/">
+      <button
+        id="homeButton"
+        className="navButton"
+        onClick={() => {
+          updateNavButtons("Home");
+        }}
+      >
+        Home
+      </button>
+    </Link>
+    <Link to="/services">
+      <button
+        id="servicesButton"
+        className="navButton"
+        onClick={() => {
+          updateNavButtons("Services");
+        }}
+      >
+        Services
+      </button>
+    </Link>
+    <Link to="/about">
+      <button
+        id="aboutButton"
+        className="navButton"
+        onClick={() => {
+          updateNavButtons("About");
+        }}
+      >
+        About
+      </button>
+    </Link>
   </div>
 );
 
