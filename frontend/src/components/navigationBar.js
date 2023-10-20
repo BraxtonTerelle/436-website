@@ -1,4 +1,4 @@
-import "./navigationBar.css";
+import "../styles/navigationBar.css";
 import { Link } from "react-router-dom";
 // Helper function that deselects a menu button specified by
 // its button id
@@ -44,7 +44,7 @@ const navigationBar = (
     <Link to="/">
       <button
         id="homeButton"
-        className="navButton"
+        className="selectedNavButton"
         onClick={() => {
           updateNavButtons("Home");
         }}

@@ -10,14 +10,14 @@
 
 .navButton {
   width: 150px;
-  height: 50px;
+  height: 40px;
   border: 0px;
   background-color: lightseagreen;
 }
 
 .selectedNavButton {
   width: 150px;
-  height: 50px;
+  height: 40px;
   border: 0px;
   font-weight: bold;
   background-color: darkcyan;
