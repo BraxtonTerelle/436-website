@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
+import logo from "../images/logo.svg";
 import { useState, useEffect } from "react";
-import "./App.css";
-import navBar from "./components/navigationBar.js";
+import "../styles/App.css";
+import navBar from "../components/navigationBar.js";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(null);
@@ -10,6 +10,7 @@ function App() {
   // page to homePage. Eventually we'll have a top menu that upon clicking
   // on a page name we'll call setCurrentPage to update the view, or just use
   // React Router
+
   useEffect(() => {
     setCurrentPage(homePage);
   }, []);
