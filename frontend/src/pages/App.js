@@ -2,6 +2,8 @@ import logo from "../images/logo.svg";
 import { useState, useEffect } from "react";
 import "../styles/App.css";
 import navBar from "../components/navigationBar.js";
+import AboutPage from "./about.js";
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState(null);
@@ -35,6 +37,8 @@ function App() {
       </div>
     );
   }
+
+  const aboutPage = <AboutPage />; // about page
 
   function homePage() {
     return <div className="homeContainer">{navBar}</div>;
