@@ -1,4 +1,4 @@
-import "../styles/navigationBar.css";
+import "../styles/NavigationBar.css";
 import { Link } from "react-router-dom";
 // Helper function that deselects a menu button specified by
 // its button id
@@ -39,42 +39,44 @@ function updateNavButtons(buttonName) {
 
 // This component returns a an absolutely positioned div
 // that represents the navigation bar for the website
-const navigationBar = (
-  <div className="navContainer">
-    <Link to="/">
-      <button
-        id="homeButton"
-        className="selectedNavButton"
-        onClick={() => {
-          updateNavButtons("Home");
-        }}
-      >
-        Home
-      </button>
-    </Link>
-    <Link to="/services">
-      <button
-        id="servicesButton"
-        className="navButton"
-        onClick={() => {
-          updateNavButtons("Services");
-        }}
-      >
-        Services
-      </button>
-    </Link>
-    <Link to="/about">
-      <button
-        id="aboutButton"
-        className="navButton"
-        onClick={() => {
-          updateNavButtons("About");
-        }}
-      >
-        About
-      </button>
-    </Link>
-  </div>
-);
+function NavigationBar(props) {
+  return (
+    <div className="navContainer">
+      <Link to="/">
+        <button
+          id="homeButton"
+          className="selectedNavButton"
+          onClick={() => {
+            updateNavButtons("Home");
+          }}
+        >
+          Home
+        </button>
+      </Link>
+      <Link to="/services">
+        <button
+          id="servicesButton"
+          className="navButton"
+          onClick={() => {
+            updateNavButtons("Services");
+          }}
+        >
+          Services
+        </button>
+      </Link>
+      <Link to="/about">
+        <button
+          id="aboutButton"
+          className="navButton"
+          onClick={() => {
+            updateNavButtons("About");
+          }}
+        >
+          About
+        </button>
+      </Link>
+    </div>
+  );
+}
 
-export default navigationBar;
+export default NavigationBar;

@@ -1,112 +1,139 @@
 import "../styles/Home.css";
 import { useState } from "react";
 //import hairOption from "../components/hairOption";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import TextField from "@mui/material/TextField";
-function HairOption({ title, price, timeEstimate }) {
-  return (
-    <div className="hairItem">
-      <h2 style={{ margin: "0", padding: "0" }}>
-        {title} - {price}
-      </h2>
-      <p style={{ margin: "0", padding: "0" }}>Estimated: {timeEstimate}</p>
-    </div>
-  );
-}
+import hairModel1 from "../images/hairModel1.jpg";
+import hairModel2 from "../images/hairModel2.jpg";
+import hairModel4 from "../images/hairModel4.jpg";
+import hairModel5 from "../images/hairModel5.jpg";
+import hairModel6 from "../images/hairModel6.jpg";
+import hairModel7 from "../images/hairModel7.jpg";
+import hairModel8 from "../images/hairModel8.jpg";
+import hairModel9 from "../images/hairModel9.jpg";
+import BookButton from "../components/BookButton.js";
+import Footer from "../components/Footer.js";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 
 function Home() {
   const [value, onChange] = useState(new Date());
   return (
     <div className="homeContainer">
       <div className="titleContainer">
-        <h1>Hair by Kharizia</h1>
+        <h1 className="titleHeader">Hair by Kharizia</h1>
       </div>
-      <div className="bookContainer">
-        <div id="leftHairOptions">
-          <HairOption title="Box Braids" price="$70" timeEstimate="4 Hours" />
-          <HairOption title="Extensions" price="$40" timeEstimate="3 Hours" />
-          <HairOption
-            title="Partial Highlights"
-            price="$40"
-            timeEstimate="2 Hours"
-          />
-          <HairOption
-            title="Full Highlights"
-            price="$60"
-            timeEstimate="3 Hours"
-          />
+      <div className="parallaxImg"></div>
+      <div className="lookingForBraidsContainer">
+        <img
+          src={hairModel1}
+          alt="Left Braids Image"
+          className="braidsImg"
+          style={{ marginLeft: "20px" }}
+        ></img>
+        <div className="lookingForBraidsContent">
+          <h1 className="titleHeader">Looking for better braids?</h1>
+          <p className="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.
+          </p>
+          <BookButton type="primary" />
         </div>
-        <div id="rightHairOptions">
-          <HairOption title="Micro Braids" price="$40" timeEstimate="2 Hours" />
-          <HairOption title="Twists" price="$40" timeEstimate="2 Hours" />
-          <HairOption
-            title="French Braids"
-            price="$50"
-            timeEstimate="3 Hours"
-          />
-          <HairOption title="Cornrows" price="$40" timeEstimate="2 Hours" />
-        </div>
+        <img
+          src={hairModel2}
+          alt="Right Braids Image"
+          className="braidsImg"
+          style={{ marginRight: "20px" }}
+        ></img>
       </div>
-      <div className="calendarContainer">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar
-            sx={{
-              marginTop: "40px",
-              marginBottom: "40px",
-              backgroundColor: "white",
-              borderRadius: "5px",
-              "&.MuiDateCalendar-root": {
-                height: "500px",
-                width: "600px",
-              },
-            }}
-          />
-        </LocalizationProvider>
+      <div className="weeklySpecialContainer">
+        <h1 className="titleHeader">This Week's Special</h1>
+        <img id="weeklySpecialImg" src={hairModel5}></img>
+        <h2 className="subtitleHeader" style={{ marginBottom: "60px" }}>
+          Knotless braids with a customized selection of beads chosen by you!
+        </h2>
+        <BookButton type="secondary" />
       </div>
-      <div className="confirmBookingSection">
-        <div className="confirmBookingContainer">
-          <TextField
-            id="phoneInput"
-            label="Phone Number"
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: "15px" }}
-          />
-          <div className="detailRow">
-            <TextField
-              id="firstNameInput"
-              label="First Name"
-              variant="outlined"
-              sx={{ marginRight: "30px" }}
-            />
-            <TextField
-              id="lastNameInput"
-              label="Last Name"
-              variant="outlined"
-            />
-          </div>
-
-          <TextField
-            id="emailInput"
-            label="Email"
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: "15px" }}
-          />
-          <TextField
-            id="customerNotesInput"
-            label="Appointment Notes (Optional)"
-            variant="outlined"
-            multiline
-            rows={4}
-            fullWidth
-            sx={{ marginBottom: "15px" }}
-          />
-          <button className="bookButton">Book Kharizia</button>
-        </div>
+      <div className="popularServicesContainer">
+        <h1 className="titleHeader">Popular services</h1>
+        <Swiper
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          slidesPerView={1}
+          loop={true}
+          speed={750}
+          pagination={{
+            clickable: true,
+            dynamicBullets: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation, Autoplay]}
+        >
+          <SwiperSlide>
+            <div className="swiperCard">
+              <img
+                className="swiperImg"
+                src={hairModel4}
+                alt="Hair Model 4"
+              ></img>
+              <h2 className="subtitleHeader">Women's knotless braids</h2>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="swiperCard">
+              <img
+                className="swiperImg"
+                src={hairModel6}
+                alt="Hair Model 6"
+              ></img>
+              <h2 className="subtitleHeader">Women's knotless braids</h2>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="swiperCard">
+              <img
+                className="swiperImg"
+                src={hairModel7}
+                alt="Hair Model 7"
+              ></img>
+              <h2 className="subtitleHeader">Women's knotless braids</h2>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="swiperCard">
+              <img
+                className="swiperImg"
+                src={hairModel8}
+                alt="Hair Model 8"
+              ></img>
+              <h2 className="subtitleHeader">Women's knotless braids</h2>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="swiperCard">
+              <img
+                className="swiperImg"
+                src={hairModel9}
+                alt="Hair Model 9"
+              ></img>
+              <h2 className="subtitleHeader">Women's knotless braids</h2>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
+      <Footer />
     </div>
   );
 }
