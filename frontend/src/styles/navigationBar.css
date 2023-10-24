@@ -4,27 +4,31 @@
   position: absolute;
   display: flex;
   flex-direction: row;
-  top: 30px;
+  top: 45px;
   right: 40px;
 }
 
 .navButton {
-  width: 150px;
-  height: 40px;
+  width: 160px;
+  height: 55px;
   border: 0px;
-  background-color: lightseagreen;
+  background-color: #ffb3c6;
+  color: "white";
+  font-size: 20px;
 }
 
 .selectedNavButton {
-  width: 150px;
-  height: 40px;
+  width: 160px;
+  height: 55px;
   border: 0px;
   font-weight: bold;
-  background-color: darkcyan;
+  background-color: #ff8fab;
+  color: "black";
+  font-size: 20px;
 }
 
 .navButton:hover {
   font-weight: bold;
-  background-color: darkcyan;
+  background-color: #ff8fab;
   cursor: pointer;
 }

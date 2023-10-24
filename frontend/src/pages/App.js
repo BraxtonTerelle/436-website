@@ -1,4 +1,3 @@
-import logo from "../images/logo.svg";
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -8,7 +7,6 @@ import HomePage from "../pages/Home.js";
 import ServicesPage from "../pages/Services.js";
 import AboutPage from "../pages/About.js";
 import ErrorPage from "../pages/Error.js";
-import loader from "../components/loader.js";
 
 function App() {
   return (

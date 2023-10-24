@@ -1,0 +1,30 @@
+.servicesContainer {
+  background-color: lightskyblue;
+  overflow-y: auto;
+  width: 100%;
+  min-height: 100vh;
+  border: 1px solid black;
+}
+
+#leftHairOptions {
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
+  padding-right: 20px;
+  flex-direction: column;
+}
+#rightHairOptions {
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 20px;
+  flex-direction: column;
+}
+
+.bookContainer {
+  width: 100%;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  display: flex;
+  border-bottom: 2px solid white;
+}
