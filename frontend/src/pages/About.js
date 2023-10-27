@@ -1,9 +1,10 @@
+import Footer from "../components/Footer";
 import "../styles/About.css";
 
 function About() {
   return (
     <>
-      <body id="aboutPage">
+      
         <div class="section about" id="titleDiv">
           <h1 id="header">About</h1>
         </div>
@@ -26,10 +27,8 @@ function About() {
           Contact Us!
         </div>
 
-        <div class="section about" id="pageDiv">
-          Hairstylist
-        </div>
-      </body>
+        <Footer />
+      
     </>
   );
 }

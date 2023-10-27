@@ -7,6 +7,7 @@ import HomePage from "../pages/Home.js";
 import ServicesPage from "../pages/Services.js";
 import AboutPage from "../pages/About.js";
 import ErrorPage from "../pages/Error.js";
+import AppointmentsPage from "../pages/Appointments.js";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="services" element={<ServicesPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="appointments" element={<AppointmentsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
