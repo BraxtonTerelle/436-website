@@ -4,60 +4,36 @@ import java.util.HashMap;
 
 public class DailyAppointmentTracker {
 
-    //MM-DD-YYYY
-    private String date;
+    private Date date;
 
-    public String getDate(){ return date; }
+    public Date getDate(){ return date; }
 
-    private HashMap<String, String> appointments;
+    private final HashMap<Time, Integer> timeSlots;
 
-    public DailyAppointmentTracker(String date){
+    private final HashMap<Integer, AppointmentInfo> appointments;
+
+    int appointmentId = 0;
+
+    public DailyAppointmentTracker(Date date){
         this.date = date;
         this.appointments = new HashMap<>();
-        int i = 9;
-        while(i < 12){
-            appointments.put(i + ":00 am", "");
-            appointments.put(i + ":30 am", "");
-            i++;
-        }
-        appointments.put("12:00 pm", "");
-        appointments.put("12:30 pm", "");
-        i = 1;
-        while(i < 5){
-            appointments.put(i + ":00 pm", "");
-            appointments.put(i + ":30 pm", "");
-            i++;
+        this.timeSlots = new HashMap<>();
+        for(int i = 10; i < 19; i++){
+            timeSlots.put(new Time(i, 0), 0);
+            timeSlots.put(new Time(i, 30), 0);
         }
     }
 
-    public void createAppointment(String time, String name, String phoneNumber){
-        if(appointments.get(time).isEmpty()){
-            appointments.put(time, name + "," + phoneNumber);
-        }
+    public String createAppointment(Time time, String name, String phoneNumber){
+        return "Appointment created.";
     }
 
-    public void deleteAppointment(String time){
-        appointments.put(time, "");
+    public String deleteAppointment(Time time){
+        return "Appointment deleted.";
     }
 
-    //change to toJSON eventually
-    @Override
-    public String toString(){
+    public String toJson(){
         String out = "";
-        int i = 9;
-        while(i < 12){
-            out += i + ":00 am - " + appointments.get(i + ":00 am");
-            out += i + ":30 am - " + appointments.get(i + ":30 am");
-            i++;
-        }
-        out += "12:00 pm - " + appointments.get("12:00 pm");
-        out += "12:30 pm - " + appointments.get("12:30 pm");
-        i = 1;
-        while(i < 5){
-            out += i + ":00 pm - " + appointments.get(i + ":00 pm");
-            out += i + ":30 pm - " + appointments.get(i + ":30 pm");
-            i++;
-        }
         return out;
     }
 
