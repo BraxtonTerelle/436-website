@@ -1,0 +1,55 @@
+
+#aptsPage {
+    display: flex; 
+    flex-direction: column;
+    min-height: 100vh; 
+    justify-content: space-between;
+}
+
+#checkBoxDiv {
+    position: absolute;
+    left: 42vw;
+    top: 10vh;
+
+}
+
+.aptsBox {
+    border: solid 2px;
+    width: 40vw;
+    height: 70vh;
+    border-radius: 10px;
+    padding-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+}
+
+#aptsContent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    padding-bottom: 10vh;
+}
+
+#viewRangeDiv {
+
+    position: absolute;
+    left: 5vw;
+    top: 15vh;
+
+}
+
+#viewDateDiv {
+
+    position: absolute;
+    left: 55vw;
+    top: 15vh;
+
+}
+
+
+

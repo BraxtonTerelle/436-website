@@ -1,3 +1,5 @@
+
+
 #aboutPage {
   margin: 0;
   padding: 0;
@@ -7,14 +9,15 @@
   max-width: 100vw;
 }
 
-#about {
+.about {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: cursive;
 }
 
 #contentDiv {
-  background-color: lightskyblue;
+  background-color: #ffb3c6;
   height: 45vh;
   font-size: 22px;
 }
@@ -31,18 +34,15 @@
 }
 
 #titleDiv {
-  background-color: white;
-  color: lightskyblue;
+  background-color: #FFE5EC;
+  color: #FB6F92;
   height: 4vh;
   font-size: 28px;
 }
 
 #contactDiv {
-  background-color: lightseagreen;
-  color: lightskyblue;
+  background-color: #FFE5EC;
+  color: #FB6F92;
 }
 
-#pageDiv {
-  background-color: white;
-  color: lightseagreen;
-}
+

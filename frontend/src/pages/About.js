@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import "../styles/About.css";
+import colorPalette from "../components/colorPalette";
 
 function About() {
   return (
