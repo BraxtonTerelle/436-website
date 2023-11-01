@@ -1,5 +1,6 @@
 import "../styles/NavigationBar.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // Helper function that deselects a menu button specified by
 // its button id
 function deselectNavButton(buttonId) {

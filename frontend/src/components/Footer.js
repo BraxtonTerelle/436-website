@@ -7,10 +7,11 @@ function Footer(props) {
     <div
       style={{
         height: "200px",
-        backgroundColor: "#ffb3c6",
+        backgroundColor: props.color === "primary" ? "#ffb3c6" : "#FFE5EC",
         display: "flex",
         justifyContent: "center",
         fontSize: "14px",
+        width: "100%",
       }}
     >
       <div
