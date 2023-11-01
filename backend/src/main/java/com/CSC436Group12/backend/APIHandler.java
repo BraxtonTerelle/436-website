@@ -3,6 +3,7 @@ package com.CSC436Group12.backend;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,12 @@ public class APIHandler {
     @GetMapping({"/deleteAppointment"})
     public String deleteAppointment(@RequestParam String date, @RequestParam String time){
         return "Appointment deleted";
+    }
+
+    @PostMapping("/reserveSlot")
+    public String reserveSlot(@RequestBody ReserveBody body) {
+        System.out.println(body);
+        return "Created reservation: " + body.toString();
     }
 
 }
