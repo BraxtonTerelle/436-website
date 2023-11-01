@@ -124,43 +124,12 @@
   margin-bottom: 15px;
 }
 
-.confirmBookingContainer {
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  padding: 20px;
-  border-radius: 3px;
-}
-
-.confirmBookingSection {
-  width: 97%;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-}
-
 .calendarContainer {
   width: 100%;
   border-bottom: 2px solid white;
 }
 
-.hairItem {
-  width: 325px;
-  height: 100px;
-  background-color: white;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin-bottom: 20px;
-  padding: 15px;
-}
-
 .homeContainer {
-  background-color: lightskyblue;
   overflow-y: auto;
   width: 100%;
   min-height: 100vh;

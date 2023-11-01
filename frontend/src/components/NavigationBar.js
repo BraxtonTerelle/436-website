@@ -1,5 +1,6 @@
 import "../styles/NavigationBar.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // Helper function that deselects a menu button specified by
 // its button id
 function deselectNavButton(buttonId) {
@@ -49,6 +50,21 @@ function updateNavButtons(buttonName) {
 // This component returns a an absolutely positioned div
 // that represents the navigation bar for the website
 function NavigationBar(props) {
+  const url = window.location.href;
+  var currentPage;
+  if (url.includes("/")) {
+    const path = url.substring(url.lastIndexOf("/"));
+    if (path.includes("services")) {
+      currentPage = "Services";
+    } else if (path.includes("about")) {
+      currentPage = "About";
+    } else {
+      currentPage = "Home";
+    }
+  } else {
+    currentPage = "Home";
+  }
+  const navigate = useNavigate();
   return (
     <div className="navContainer">
       <Link to="/">

@@ -98,7 +98,7 @@ function AppointmentsPage() {
             
             </div>
 
-            <Footer />
+            <Footer color="primary"/>
         </>
     )
 }
