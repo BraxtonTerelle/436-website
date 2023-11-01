@@ -24,7 +24,7 @@ public class ReserveBody {
     //     this.flags = flags;
     // }
 
-    ReserveBody(Date date, Time time, Duration duration) {
+    public ReserveBody(Date date, Time time, Duration duration) {
         this.date = date;
         this.time = time;
         this.duration = duration;
@@ -38,6 +38,6 @@ public class ReserveBody {
     // }
 
     public String toString() {
-        return "Appointment Reservation at " + date + ", " + time +  " held for " + duration + ".";
+        return "Appointment Reservation at " + time + ", " + date +  " held for " + duration + ".";
     }
 }
