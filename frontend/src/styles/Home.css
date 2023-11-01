@@ -124,23 +124,6 @@
   margin-bottom: 15px;
 }
 
-.confirmBookingContainer {
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  padding: 20px;
-  border-radius: 3px;
-}
-
-.confirmBookingSection {
-  width: 97%;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-}
-
 .calendarContainer {
   width: 100%;
   border-bottom: 2px solid white;

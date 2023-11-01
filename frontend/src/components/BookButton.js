@@ -12,7 +12,7 @@ function BookButton(props) {
         fontSize: "20px",
       }}
     >
-      Book Now
+      {props.label}
     </button>
   );
 }
