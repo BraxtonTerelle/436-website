@@ -4,16 +4,16 @@ public class AppointmentInfo {
 
     private Date date;
     private Time time;
-    private String name;
-    private String phoneNumber;
+    private Time duration;
+    private ContactInfo contactInfo;
 
     private Boolean completed;
 
-    public AppointmentInfo(Date date, Time time, String name, String phoneNumber){
+    public AppointmentInfo(Date date, Time time, Time duration, ContactInfo contactInfo){
         this.date = date;
         this.time = time;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.duration = duration;
+        this.contactInfo = contactInfo;
         this.completed = false;
     }
 
@@ -37,24 +37,21 @@ public class AppointmentInfo {
         this.time = time;
     }
 
-    public String getName() {
-        return name;
+    public Time getDuration() { return duration; }
+
+    public void setDuration(Time duration) { this.duration = duration; }
+
+    public ContactInfo getContactInfo() {
+        return contactInfo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public String toJSON(){
-        return "{ \"date\": \"" + date.toString() + "\", \"time\": \"" + time.toString() + "\", \"name\": \"" + name + "\", \"phoneNumber\": \"" + phoneNumber + "\" }";
+        return "";
     }
 
 }

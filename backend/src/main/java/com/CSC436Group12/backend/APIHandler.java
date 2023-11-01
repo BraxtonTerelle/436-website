@@ -1,11 +1,6 @@
 package com.CSC436Group12.backend;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -24,12 +19,13 @@ public class APIHandler {
         return "Appointments list";
     }
 
-    @GetMapping({"/createAppointment"})
-    public String createAppointment(@RequestParam String date, @RequestParam String time, @RequestParam String name, @RequestParam String phoneNumber){
-        return "Appointment created";
+    @PostMapping({"/createAppointment"})
+    @ResponseBody
+    public AppointmentInfo createAppointment(@RequestBody createAppointmentBody appointmentBody){
+        return new AppointmentInfo(appointmentBody.getDate(), appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
     }
 
-    @GetMapping({"/deleteAppointment"})
+    @GetMapping({"/wdeleteAppointment"})
     public String deleteAppointment(@RequestParam String date, @RequestParam String time){
         return "Appointment deleted";
     }
