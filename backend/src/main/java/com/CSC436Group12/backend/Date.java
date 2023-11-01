@@ -15,5 +15,29 @@ public class Date {
     public String toString(){
         return month + "-" + day + "-" + year;
     }
+    
+    public int getMonth() {
+    	return month;
+    }
+    
+    public int getDay() {
+    	return month;
+    }
+    
+    public int getYear() {
+    	return month;
+    }
+    
+    public void setMonth(int month) {
+    	this.month = month;
+    }
+    
+    public void setDay(int day) {
+    	this.day = day;
+    }
+    
+    public void setYear(int year) {
+    	this.year = year;
+    }
 
 }
