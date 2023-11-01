@@ -20,13 +20,11 @@ function Services() {
               title="Box Braids"
               price="$70"
               timeEstimate="4 Hours"
-              addons={["Colored Beads"]}
             />
             <ServiceItem
               title="Extensions"
               price="$40"
               timeEstimate="3 Hours"
-              addons={["Free Shampoo"]}
             />
             <ServiceItem
               title="Partial Highlights"
@@ -44,14 +42,12 @@ function Services() {
               title="Micro Braids"
               price="$40"
               timeEstimate="2 Hours"
-              addons={["Colored Beads"]}
             />
             <ServiceItem title="Twists" price="$40" timeEstimate="2 Hours" />
             <ServiceItem
               title="French Braids"
               price="$50"
               timeEstimate="3 Hours"
-              addons={["Colored Beads"]}
             />
             <ServiceItem title="Cornrows" price="$40" timeEstimate="2 Hours" />
           </div>
