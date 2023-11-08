@@ -62,6 +62,7 @@ function getAppointmentsDate() {
     .catch((err) => {
       console.error(err);
     });*/
+    
   document.getElementById("res2Div").innerText = JSON.stringify({
     date: { month: 10, day: 22, year: 2023 },
     time: { hour: 10, minute: 45 },

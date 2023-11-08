@@ -1,6 +1,7 @@
 function BookButton(props) {
   return (
     <button
+      onClick={props.onClick}
       className="buttonContainer"
       style={{
         height: "70px",

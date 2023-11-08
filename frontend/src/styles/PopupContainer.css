@@ -1,0 +1,73 @@
+.servicesPopupContainer {
+  display: flex;
+  width: 95%;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.transparentBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.contentContainer {
+  background-color: white;
+  border-radius: 10px;
+  width: 80%;
+  height: 70%;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.cancelBox {
+  width: 100%;
+  text-align: right;
+}
+
+.confirmBookingContainer {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 3px;
+}
+
+.cancelButton {
+  border-radius: 50%;
+  background-color: lightgray;
+  color: black;
+  padding: 15px;
+  outline: none;
+  border: none;
+  font-weight: bold;
+}
+
+.innerContentContainer {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.bottomButtonRow {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.stepContentContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
