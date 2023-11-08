@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4659e43f-852f-4752-be63-9dd5cff91b35" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/ContactInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/createAppointmentBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/deleteAppointmentBody.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/APIHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/APIHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/AppointmentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/AppointmentInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/AppointmentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/DailyAppointmentTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/DailyAppointments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Date.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Time.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,16 +50,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/karee/Documents/GitHub/436-website/backend"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/karee/Documents/GitHub/436-website/backend&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="backend" />

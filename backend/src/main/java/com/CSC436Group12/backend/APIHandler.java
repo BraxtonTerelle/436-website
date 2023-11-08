@@ -3,31 +3,49 @@ package com.CSC436Group12.backend;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class APIHandler {
 
-    private ArrayList<DailyAppointmentTracker> appointmentsList;
+    private SortedSet<DailyAppointments> dailyAppointments;
 
     public APIHandler(){
-        appointmentsList = new ArrayList<>();
+        dailyAppointments = new TreeSet<>((dailyAppointments1, dailyAppointments2) -> dailyAppointments1.getDate().compareTo(dailyAppointments2.getDate()));
     }
 
     @GetMapping({"/getAppointments"})
-    public String getAppointments() {
-        return "Appointments list";
+    public SortedSet<DailyAppointments> getAppointments() {
+        return dailyAppointments;
     }
 
     @PostMapping({"/createAppointment"})
     @ResponseBody
-    public AppointmentInfo createAppointment(@RequestBody createAppointmentBody appointmentBody){
-        return new AppointmentInfo(appointmentBody.getDate(), appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
+    public Appointment createAppointment(@RequestBody createAppointmentBody appointmentBody){
+        //if dailyAppointments has appointmentBody.getDate() then add appointment to that DailyAppointments
+        //else create new DailyAppointments with appointmentBody.getDate() and add appointment to that DailyAppointments
+        //return appointment
+        for(DailyAppointments dailyAppointment : dailyAppointments){
+            if(dailyAppointment.getDate().compareTo(appointmentBody.getDate()) == 0){
+                dailyAppointment.createAppointment(appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
+                return dailyAppointment.getAppointment(appointmentBody.getTime());
+            }
+        }
+        Appointment a = new Appointment(appointmentBody.getDate(), appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
+        dailyAppointments.add(new DailyAppointments(appointmentBody.getDate(), a));
+        return a;
     }
 
-    @GetMapping({"/wdeleteAppointment"})
-    public String deleteAppointment(@RequestParam String date, @RequestParam String time){
-        return "Appointment deleted";
+    @PostMapping({"/deleteAppointment"})
+    public void deleteAppointment(@RequestBody deleteAppointmentBody appointmentBody){
+        for(DailyAppointments dailyAppointment : dailyAppointments){
+            if(dailyAppointment.getDate().compareTo(appointmentBody.getDate()) == 0){
+                dailyAppointment.deleteAppointment(appointmentBody.getTime());
+                return;
+            }
+        }
     }
 
     @PostMapping("/reserveSlot")

@@ -30,4 +30,13 @@ public class Time {
     	this.minute = minute;
     }
 
+    public int compareTo(Time otherTime){
+        if(this.hour > otherTime.hour) return 1;
+        else if(this.hour < otherTime.hour) return -1;
+        else{
+            if(this.minute > otherTime.minute) return 1;
+            else if(this.minute < otherTime.minute) return -1;
+            else return 0;
+        }
+    }
 }

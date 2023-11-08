@@ -40,4 +40,18 @@ public class Date {
     	this.year = year;
     }
 
+    public int compareTo(Date otherDate){
+        if(this.year > otherDate.year) return 1;
+        else if(this.year < otherDate.year) return -1;
+        else{
+            if(this.month > otherDate.month) return 1;
+            else if(this.month < otherDate.month) return -1;
+            else{
+                if(this.day > otherDate.day) return 1;
+                else if(this.day < otherDate.day) return -1;
+                else return 0;
+            }
+        }
+    }
+
 }
