@@ -46,4 +46,8 @@ public class ContactInfo {
     	this.phoneNumber = phoneNumber;
     }
 
+    public String toString() {
+    	
+    	return getLastName() + ", " + getFirstName() + ": " + getPhoneNumber();
+    }
 }

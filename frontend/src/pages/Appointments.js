@@ -45,24 +45,26 @@ function getAppointmentsRange() {
   });
 }
 
-function getAppointmentsDate() {
-  var date = document.getElementById("date").value;
+function getAppointments() {
 
-  console.log(date);
-
-  /*var url = `http://localhost:8080/getAppointments?date=${date}`;
+  var url = 'http://localhost:8080/getAppointments';
 
   fetch(url)
     .then((res) => {
       return res.text();
     })
     .then((text) => {
+      console.log(text);
       document.getElementById("res2Div").innerText = text;
     })
     .catch((err) => {
       console.error(err);
-    });*/
+    });
+
+  
     
+
+    /*
   document.getElementById("res2Div").innerText = JSON.stringify({
     date: { month: 10, day: 22, year: 2023 },
     time: { hour: 10, minute: 45 },
@@ -74,8 +76,12 @@ function getAppointmentsDate() {
       phoneNumber: "111-222-3333",
     },
   });
+  */
 }
 
+
+
+/*
 function createAppointment() {
   var url = `http://localhost:8080/createAppointment`;
   var body = {
@@ -116,6 +122,10 @@ function createAppointment() {
     .catch((err) => {
       console.error(err);
     });
+}*/
+
+function deleteAppointment() {
+
 }
 
 function AppointmentsPage() {
@@ -125,49 +135,23 @@ function AppointmentsPage() {
         <h1 className="titleHeader">Hair by Kharizia</h1>
       </div>
       <div id="aptsPage">
-        <div class="aptsBox" id="viewRangeDiv">
-          <div id="input1Div">
-            View Appointments Between:
-            <br></br>
-            <input type="date" id="startDate"></input>
-            <input type="date" id="endDate"></input>
-            <br></br>
-            <button id="searchApts" onClick={getAppointmentsRange}>
-              Search
-            </button>
-          </div>
-
-          <div id="res1Div"></div>
-        </div>
+        
 
         <div class="aptsBox" id="viewDateDiv">
           <div id="input2Div">
-            View Appointments On:
+            View Appointments:
             <br></br>
-            <input type="date" id="date"></input>
-            <br></br>
-            <button id="searchDate" onClick={getAppointmentsDate}>
-              Search
+            
+            <button id="searchDate" onClick={getAppointments}>
+              Get Appointments
             </button>
           </div>
 
+          <br></br>
           <div id="res2Div"></div>
         </div>
 
-        <div class="aptsBox" id="viewRangeDiv">
-          <div id="input3Div">
-            Create Appointment:
-            <br></br>
-            <input type="date" id="startDate"></input>
-            <input type="date" id="endDate"></input>
-            <br></br>
-            <button id="searchApts" onClick={createAppointment}>
-              Create
-            </button>
-          </div>
-
-          <div id="res3Div"></div>
-        </div>
+        
       </div>
 
       <Footer color="secondary" />

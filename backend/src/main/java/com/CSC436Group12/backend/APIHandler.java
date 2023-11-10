@@ -17,8 +17,14 @@ public class APIHandler {
     }
 
     @GetMapping({"/getAppointments"})
-    public SortedSet<DailyAppointments> getAppointments() {
-        return dailyAppointments;
+    public String getAppointments() {
+    	String retval = "";
+    	for (DailyAppointments dailyApts : dailyAppointments) {
+    		System.out.println(dailyApts);
+    		retval += dailyApts.toString() + "\n";
+    	}
+    	
+        return retval;
     }
 
     @PostMapping({"/createAppointment"})

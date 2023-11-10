@@ -56,5 +56,10 @@ public class DailyAppointments {
             }
         });
     }
+    
+    public String toString() {
+    	String s = appointments.first().toJSON();
+    	return s;
+    }
 
 }

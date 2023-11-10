@@ -12,6 +12,7 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import BookButton from "./BookButton.js";
 import ServiceItem from "./ServiceItem";
+import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
 
 export default function PopupContainer({ active, setActive }) {
   const [activeStep, setActiveStep] = useState(0);
