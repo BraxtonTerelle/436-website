@@ -79,7 +79,8 @@ public class Appointment {
     }
 
     public String toJSON(){
-        return "";
+        return date + "   " + contactInfo;
+    	//return "";
     }
 
 }

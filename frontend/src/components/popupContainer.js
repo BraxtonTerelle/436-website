@@ -12,9 +12,16 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import BookButton from "../components/BookButton.js";
 import ServiceItem from "../components/ServiceItem";
+import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
 
 export default function PopupContainer({ active, setActive }) {
   const [activeStep, setActiveStep] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  
   const stepLabels = [
     "Choose Service",
     "Choose Date and Time",
@@ -32,6 +39,96 @@ export default function PopupContainer({ active, setActive }) {
     setActiveStep(0);
     document.body.style.overflowY = "scroll";
     setActive(false);
+  }
+
+  function handleDateChange(date) {
+    setSelectedDate(date);
+  }
+
+  function handlePhoneChange(event) {
+    setPhoneNumber(event.target.value);
+  };
+
+  function handleFirstNameChange(event) {
+    setFirstName(event.target.value);
+  };
+
+  function handleLastNameChange(event) {
+    setLastName(event.target.value);
+  };
+
+  function handleEmailChange(event) {
+    setEmail(event.target.value);
+  };
+
+  function callCreateApptAPI() {
+
+    var dateObj = selectedDate.$d;
+
+    const jsonObj = {
+      date: {
+        month: dateObj.getMonth() + 1,
+        day: dateObj.getDate(),
+        year: dateObj.getFullYear(),
+      }, 
+      time: {
+        hour: dateObj.getHours(),
+        minute: dateObj.getMinutes(),
+      },
+      duration: {
+        hours: 0,
+        minutes: 20,
+      },
+      contactInfo: {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+      }
+    };
+
+    var url = "http://localhost:8080/createAppointment";
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jsonObj),
+    }).then((res) => {
+      res.json();
+    }).then((jsonRes) => {
+      console.log(jsonRes);
+    }).catch((err) => {
+      console.log(err);
+    })
+
+    console.log(jsonObj);
+
+
+  }
+
+  function setTimeSlot(slotTime) {
+    const availHoursStart = new Date(
+      slotTime.getFullYear(),
+      slotTime.getMonth(),
+      slotTime.getDate(),
+      9,
+      0,
+      0
+    );
+
+    const availHoursEnd = new Date(
+      slotTime.getFullYear(),
+      slotTime.getMonth(),
+      slotTime.getDate(),
+      20,
+      0,
+      0
+    );
+
+    const isValid = slotTime.getTime() > availHoursStart.getTime() && slotTime.getTime() < availHoursEnd.getTime();
+    return isValid;
   }
 
   // if the "active" useState variable is true, display the popup. Otherwise display nothing
@@ -117,7 +214,13 @@ export default function PopupContainer({ active, setActive }) {
                 <StepContent className="servicesPopupContainer">
                   <div className="stepContentContainer">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DateCalendar
+                      <StaticDateTimePicker
+                        ampm={false}
+                        ampmInClock={false}
+                        disablePast={true}
+                        //maxTime={//maxTime}
+                        value={selectedDate}
+                        onChange={handleDateChange}
                         sx={{
                           marginTop: "40px",
                           marginBottom: "40px",
@@ -128,6 +231,7 @@ export default function PopupContainer({ active, setActive }) {
                             width: "600px",
                           },
                         }}
+                        
                       />
                     </LocalizationProvider>
                   </div>
@@ -144,6 +248,8 @@ export default function PopupContainer({ active, setActive }) {
                         variant="outlined"
                         fullWidth
                         sx={{ marginBottom: "15px" }}
+                        value={phoneNumber}
+                        onChange={handlePhoneChange}
                       />
                       <div className="detailRow">
                         <TextField
@@ -151,11 +257,15 @@ export default function PopupContainer({ active, setActive }) {
                           label="First Name"
                           variant="outlined"
                           sx={{ marginRight: "30px" }}
+                          value={firstName}
+                          onChange={handleFirstNameChange}
                         />
                         <TextField
                           id="lastNameInput"
                           label="Last Name"
                           variant="outlined"
+                          value={lastName}
+                          onChange={handleLastNameChange}
                         />
                       </div>
 
@@ -165,6 +275,8 @@ export default function PopupContainer({ active, setActive }) {
                         variant="outlined"
                         fullWidth
                         sx={{ marginBottom: "15px" }}
+                        value={email}
+                        onChange={handleEmailChange}
                       />
                       <TextField
                         id="customerNotesInput"
@@ -175,7 +287,7 @@ export default function PopupContainer({ active, setActive }) {
                         fullWidth
                         sx={{ marginBottom: "15px" }}
                       />
-                      <BookButton label="Book Now" type="primary" />
+                      <BookButton label="Book Now" type="primary" onClick={callCreateApptAPI}/>
                     </div>
                   </div>
                 </StepContent>
