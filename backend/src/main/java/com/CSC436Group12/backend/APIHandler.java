@@ -18,6 +18,11 @@ public class APIHandler {
 
     @GetMapping({"/getAppointments"})
     public String getAppointments() {
+    	if (dailyAppointments.size() == 0) {
+    		return "There are no scheduled appointments";
+    	}
+    	
+    	
     	String retval = "";
     	for (DailyAppointments dailyApts : dailyAppointments) {
     		System.out.println(dailyApts);
@@ -46,13 +51,14 @@ public class APIHandler {
     }
 
     @PostMapping({"/deleteAppointment"})
-    public void deleteAppointment(@RequestBody deleteAppointmentBody appointmentBody){
+    public String deleteAppointment(@RequestBody deleteAppointmentBody appointmentBody){
         for(DailyAppointments dailyAppointment : dailyAppointments){
             if(dailyAppointment.getDate().compareTo(appointmentBody.getDate()) == 0){
                 dailyAppointment.deleteAppointment(appointmentBody.getTime());
-                return;
+                return "deleted";
             }
         }
+        return "This appointment does not exist";
     }
 
     @PostMapping("/reserveSlot")

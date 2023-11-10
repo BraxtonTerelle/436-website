@@ -58,6 +58,9 @@ public class DailyAppointments {
     }
     
     public String toString() {
+    	if (appointments.size() == 0) {
+    		return "";
+    	}
     	String s = appointments.first().toJSON();
     	return s;
     }

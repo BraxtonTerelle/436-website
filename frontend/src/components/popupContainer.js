@@ -106,6 +106,11 @@ export default function PopupContainer({ active, setActive }) {
       });
 
     console.log(jsonObj);
+
+    alert("Your Booking is Confirmed");
+    setActive(false);
+
+    
   }
 
   function setTimeSlot(slotTime) {
