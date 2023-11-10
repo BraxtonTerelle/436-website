@@ -10,9 +10,8 @@ import { StepLabel } from "@mui/material";
 import StepContent from "@mui/material/StepContent";
 import { useState } from "react";
 import { TextField } from "@mui/material";
-import BookButton from "../components/BookButton.js";
-import ServiceItem from "../components/ServiceItem";
-import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
+import BookButton from "./BookButton.js";
+import ServiceItem from "./ServiceItem";
 
 export default function PopupContainer({ active, setActive }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -21,7 +20,7 @@ export default function PopupContainer({ active, setActive }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  
+
   const stepLabels = [
     "Choose Service",
     "Choose Date and Time",
@@ -47,22 +46,21 @@ export default function PopupContainer({ active, setActive }) {
 
   function handlePhoneChange(event) {
     setPhoneNumber(event.target.value);
-  };
+  }
 
   function handleFirstNameChange(event) {
     setFirstName(event.target.value);
-  };
+  }
 
   function handleLastNameChange(event) {
     setLastName(event.target.value);
-  };
+  }
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
-  };
+  }
 
   function callCreateApptAPI() {
-
     var dateObj = selectedDate.$d;
 
     const jsonObj = {
@@ -70,7 +68,7 @@ export default function PopupContainer({ active, setActive }) {
         month: dateObj.getMonth() + 1,
         day: dateObj.getDate(),
         year: dateObj.getFullYear(),
-      }, 
+      },
       time: {
         hour: dateObj.getHours(),
         minute: dateObj.getMinutes(),
@@ -84,28 +82,29 @@ export default function PopupContainer({ active, setActive }) {
         lastName: lastName,
         email: email,
         phoneNumber: phoneNumber,
-      }
+      },
     };
 
     var url = "http://localhost:8080/createAppointment";
 
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(jsonObj),
-    }).then((res) => {
-      res.json();
-    }).then((jsonRes) => {
-      console.log(jsonRes);
-    }).catch((err) => {
-      console.log(err);
     })
+      .then((res) => {
+        res.json();
+      })
+      .then((jsonRes) => {
+        console.log(jsonRes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     console.log(jsonObj);
-
-
   }
 
   function setTimeSlot(slotTime) {
@@ -127,7 +126,9 @@ export default function PopupContainer({ active, setActive }) {
       0
     );
 
-    const isValid = slotTime.getTime() > availHoursStart.getTime() && slotTime.getTime() < availHoursEnd.getTime();
+    const isValid =
+      slotTime.getTime() > availHoursStart.getTime() &&
+      slotTime.getTime() < availHoursEnd.getTime();
     return isValid;
   }
 
@@ -231,7 +232,6 @@ export default function PopupContainer({ active, setActive }) {
                             width: "600px",
                           },
                         }}
-                        
                       />
                     </LocalizationProvider>
                   </div>
@@ -287,7 +287,11 @@ export default function PopupContainer({ active, setActive }) {
                         fullWidth
                         sx={{ marginBottom: "15px" }}
                       />
-                      <BookButton label="Book Now" type="primary" onClick={callCreateApptAPI}/>
+                      <BookButton
+                        label="Book Now"
+                        type="primary"
+                        onClick={callCreateApptAPI}
+                      />
                     </div>
                   </div>
                 </StepContent>
