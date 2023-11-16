@@ -1,0 +1,82 @@
+.addSpecificDate:hover {
+  cursor: pointer;
+}
+
+.availabilityContainer {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1200px;
+  padding-bottom: 20px;
+}
+
+.availabilityContent {
+  display: flex;
+  text-align: left;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid gray;
+  margin-bottom: 20px;
+}
+
+.specificDatesContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.weeklyHoursContainer {
+  width: 50%;
+  padding: 20px;
+  border-right: 1px solid gray;
+}
+
+.specificHoursContainer {
+  width: 50%;
+  padding: 20px;
+}
+
+#paddedContainer {
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+h1 {
+  font-family: cursive;
+  font-size: 40px;
+}
+
+#contentDiv {
+  background-color: #ffb3c6;
+  min-height: 70vh;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.section {
+  width: 100%;
+  text-align: center;
+}
+
+.titleContainer {
+  height: 2vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ffe5ec;
+  color: #fb6f92;
+}
+
+.titleHeader {
+  font-size: 40px;
+  font-family: cursive;
+  font-weight: bold;
+}

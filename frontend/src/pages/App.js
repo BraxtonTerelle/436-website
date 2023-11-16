@@ -8,6 +8,7 @@ import ServicesPage from "../pages/Services.js";
 import AboutPage from "../pages/About.js";
 import ErrorPage from "../pages/Error.js";
 import AppointmentsPage from "../pages/Appointments.js";
+import Admin from "../pages/Admin.js";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="appointments" element={<AppointmentsPage />} />
+          <Route path="admin" element={<Admin />} />
         </Route>
       </Routes>
     </BrowserRouter>
