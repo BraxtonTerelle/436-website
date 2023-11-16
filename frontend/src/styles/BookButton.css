@@ -1,0 +1,12 @@
+.buttonContainer {
+  height: 70px;
+  width: 190px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 0;
+  font-size: 20px;
+}
+
+.buttonContainer:hover {
+  cursor: pointer;
+}

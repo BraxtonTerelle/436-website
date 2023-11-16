@@ -1,6 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import NavBar from "../components/NavigationBar.js";
 import SmallNavBar from "../components/SmallNavBar.js";
 
 function Layout(props) {
@@ -21,7 +20,7 @@ function Layout(props) {
 
   return (
     <>
-      {viewportWidth < 1400 ? <SmallNavBar /> : <NavBar />}
+      <SmallNavBar />
       <Outlet />
     </>
   );

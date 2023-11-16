@@ -11,8 +11,8 @@ function About() {
         <h1 className="titleHeader">Hair by Kharizia</h1>
       </div>
 
-      <div class="section about" id="contentDiv">
-        <div id="paddedContainer">
+      <div class="section about" id="aboutContentDiv">
+        <div id="aboutPaddedContainer">
           <h1>About</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id ex
@@ -76,7 +76,7 @@ function About() {
         </div>
       </div>
 
-      <Footer color="primary"/>
+      <Footer color="primary" />
     </>
   );
 }

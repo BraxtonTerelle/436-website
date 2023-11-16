@@ -75,6 +75,15 @@ function SmallNavBar(props) {
         >
           About
         </MenuItem>
+        <MenuItem
+          key="Appointments"
+          onClick={() => {
+            navigate("/appointments");
+            handleClose();
+          }}
+        >
+          Appointments
+        </MenuItem>
       </Menu>
     </div>
   );
