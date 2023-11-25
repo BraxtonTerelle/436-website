@@ -1,6 +1,11 @@
 package com.CSC436Group12.backend;
 
-public class Date {
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+public class Date implements Serializable {
+    private static final long serialVersionUID = 1;
 
     private int month;
     private int day;
@@ -21,11 +26,11 @@ public class Date {
     }
     
     public int getDay() {
-    	return month;
+    	return day;
     }
     
     public int getYear() {
-    	return month;
+    	return year;
     }
     
     public void setMonth(int month) {
@@ -52,6 +57,19 @@ public class Date {
                 else return 0;
             }
         }
+    }
+
+    // Returns a date for today, to ease testing.
+    // It may also be wise to just convert to using the proper date
+    // from java.time completely.
+    public static Date getToday() {
+        // the modern java date implementation, apparently.
+        // see: https://stackoverflow.com/questions/5046771/how-to-get-todays-date
+        // for a longer explanation.
+        ZoneId zoneId = ZoneId.of("US/Arizona");
+        LocalDate today = LocalDate.now(zoneId);
+        Date toReturn = new Date(today.getMonthValue(), today.getDayOfMonth(), today.getYear());
+        return toReturn;
     }
 
 }

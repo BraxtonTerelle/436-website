@@ -1,6 +1,9 @@
 package com.CSC436Group12.backend;
 
-public class Time {
+import java.io.Serializable;
+
+public class Time implements Serializable{
+    private static final long serialVersionUID = 1;
 
     private int hour;
     private int minute;
