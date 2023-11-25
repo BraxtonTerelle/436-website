@@ -67,4 +67,15 @@ public class APIHandler {
         return "Created reservation: " + body.toString();
     }
 
+    @PostMapping("/testBackup")
+    public void testBackup() {
+        DailyAppointments toSave = new DailyAppointments(new Date(11, 24, 2023));
+        toSave.createAppointment(new Time(11, 30), new Time(0, 30));
+        toSave.createAppointment(new Time(15, 0), new Time(1, 0));
+        toSave.writeAppointments("testA");
+        DailyAppointments toLoad = new DailyAppointments(Date.getToday());
+        boolean status = toLoad.readAppointments("testA2023-11-24.ser");
+        System.out.println(status);
+    }
+
 }
