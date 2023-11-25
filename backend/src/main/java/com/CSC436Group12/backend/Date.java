@@ -59,4 +59,17 @@ public class Date implements Serializable {
         }
     }
 
+    // Returns a date for today, to ease testing.
+    // It may also be wise to just convert to using the proper date
+    // from java.time completely.
+    public static Date getToday() {
+        // the modern java date implementation, apparently.
+        // see: https://stackoverflow.com/questions/5046771/how-to-get-todays-date
+        // for a longer explanation.
+        ZoneId zoneId = ZoneId.of("US/Arizona");
+        LocalDate today = LocalDate.now(zoneId);
+        Date toReturn = new Date(today.getMonthValue(), today.getDayOfMonth(), today.getYear());
+        return toReturn;
+    }
+
 }
