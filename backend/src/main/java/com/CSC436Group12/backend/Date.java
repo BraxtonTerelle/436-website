@@ -26,11 +26,11 @@ public class Date implements Serializable {
     }
     
     public int getDay() {
-    	return month;
+    	return day;
     }
     
     public int getYear() {
-    	return month;
+    	return year;
     }
     
     public void setMonth(int month) {
