@@ -1,6 +1,9 @@
 package com.CSC436Group12.backend;
 
-public class Appointment {
+import java.io.Serializable;
+
+public class Appointment implements Serializable {
+    private static final long serialVersionUID = 1;
 
     private Date date;
     private Time time;

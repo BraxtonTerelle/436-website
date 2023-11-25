@@ -1,6 +1,11 @@
 package com.CSC436Group12.backend;
 
-public class Date {
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+public class Date implements Serializable {
+    private static final long serialVersionUID = 1;
 
     private int month;
     private int day;

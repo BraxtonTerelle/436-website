@@ -1,6 +1,9 @@
 package com.CSC436Group12.backend;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+    private static final long serialVersionUID = 1;
 
     public User(){}
 

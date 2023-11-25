@@ -1,6 +1,9 @@
 package com.CSC436Group12.backend;
 
-public class ContactInfo {
+import java.io.Serializable;
+
+public class ContactInfo implements Serializable {
+    private static final long serialVersionUID = 1;
 
     private String firstName;
     private String lastName;
