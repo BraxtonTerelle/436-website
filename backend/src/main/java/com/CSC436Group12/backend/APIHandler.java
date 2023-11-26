@@ -2,7 +2,7 @@ package com.CSC436Group12.backend;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -13,7 +13,9 @@ public class APIHandler {
     private SortedSet<DailyAppointments> dailyAppointments;
 
     public APIHandler(){
-        dailyAppointments = new TreeSet<>((dailyAppointments1, dailyAppointments2) -> dailyAppointments1.getDate().compareTo(dailyAppointments2.getDate()));
+        dailyAppointments = Collections.synchronizedSortedSet(
+            new TreeSet<>((dailyAppointments1, dailyAppointments2) 
+            -> dailyAppointments1.getDate().compareTo(dailyAppointments2.getDate())));
     }
 
     @GetMapping({"/getAppointments"})
