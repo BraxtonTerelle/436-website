@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import com.CSC436Group12.backend.Appointment;
 import com.CSC436Group12.backend.DailyAppointments;
 import com.CSC436Group12.backend.Date;
-import com.CSC436Group12.backend.Duration;
 import com.CSC436Group12.backend.Time;
 
 public class DailyAppointmentsTest {

@@ -31,6 +31,10 @@ public class ReserveBody {
         this.flags = new Flags();
     }
 
+    public Flags getFlags() {
+        return flags;
+    }
+
     // ReserveBody() {
     //     this.date = new Date(11, 3, 2023);
     //     this.time = new Time(15, 15);
