@@ -6,7 +6,7 @@ public class Availability implements Serializable {
     private static final long serialVersionUID = 2;
 
     public enum Location {
-        Pheonix, Tucson
+        Phoenix, Tucson
     }
 
     private Time startTime;
