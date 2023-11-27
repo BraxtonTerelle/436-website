@@ -3,8 +3,49 @@ import TextField from "@mui/material/TextField";
 import "../styles/About.css";
 import colorPalette from "../components/colorPalette";
 import BookButton from "../components/BookButton";
+import emailjs from "emailjs-com";
+import { useState } from "react";
 
 function About() {
+  const [firstName, setFirstName] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+
+  function submitForm(form) {
+    emailjs
+      .sendForm("service_8p8y3vp", "contact_form", form, "-lCn9pWg2EQK_ZcRl")
+      .then(
+        (result) => {
+          alert("Successfully sent email");
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  }
+
+  function createForm(from_email, subject, from_name, givenMessage) {
+    var form = document.createElement("form");
+    var fromEmail = document.createElement("input");
+    fromEmail.name = "from_email";
+    fromEmail.setAttribute("value", from_email);
+    var subjectInput = document.createElement("input");
+    subjectInput.name = "subject";
+    subjectInput.setAttribute("value", subject);
+    var fromName = document.createElement("input");
+    fromName.name = "from_name";
+    fromName.setAttribute("value", from_name);
+    var message = document.createElement("input");
+    message.name = "message";
+    message.setAttribute("value", givenMessage);
+    form.appendChild(fromEmail);
+    form.appendChild(subjectInput);
+    form.appendChild(fromName);
+    form.appendChild(message);
+    submitForm(form);
+  }
+
   return (
     <>
       <div className="titleContainer">
@@ -41,6 +82,10 @@ function About() {
               id="firstNameInput"
               label="First Name"
               variant="outlined"
+              value={firstName}
+              onChange={(newVal) => {
+                setFirstName(newVal.target.value);
+              }}
               sx={{ marginRight: "30px" }}
             />
             <TextField
@@ -52,6 +97,10 @@ function About() {
           <TextField
             id="emailInput"
             label="Email"
+            value={email}
+            onChange={(newVal) => {
+              setEmail(newVal.target.value);
+            }}
             variant="outlined"
             fullWidth
             sx={{ marginBottom: "15px" }}
@@ -59,6 +108,10 @@ function About() {
           <TextField
             id="subjectInput"
             label="Subject"
+            value={subject}
+            onChange={(newVal) => {
+              setSubject(newVal.target.value);
+            }}
             variant="outlined"
             fullWidth
             sx={{ marginBottom: "15px" }}
@@ -68,11 +121,21 @@ function About() {
             label="Type your message here..."
             variant="outlined"
             multiline
+            value={message}
+            onChange={(newVal) => {
+              setMessage(newVal.target.value);
+            }}
             rows={4}
             fullWidth
             sx={{ marginBottom: "15px" }}
           />
-          <BookButton label="Submit" type="primary" />
+          <BookButton
+            onClick={() => {
+              createForm(email, subject, firstName, message);
+            }}
+            label="Submit"
+            type="primary"
+          />
         </div>
       </div>
 

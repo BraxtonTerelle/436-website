@@ -13,6 +13,7 @@ import BookButton from "./BookButton.js";
 import ServiceItem from "./ServiceItem";
 import { StaticDateTimePicker } from "@mui/x-date-pickers";
 import UniversalPopup from "../components/UniversalPopup";
+import emailjs from "emailjs-com";
 
 export default function PopupContainer({ active, setActive }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -61,7 +62,48 @@ export default function PopupContainer({ active, setActive }) {
     setEmail(event.target.value);
   }
 
+  function submitForm(form) {
+    emailjs
+      .sendForm("service_8p8y3vp", "contact_form", form, "-lCn9pWg2EQK_ZcRl")
+      .then(
+        (result) => {
+          alert("Successfully sent email");
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  }
+
+  function createForm(from_email, subject, from_name, givenMessage) {
+    var form = document.createElement("form");
+    var fromEmail = document.createElement("input");
+    fromEmail.name = "from_email";
+    fromEmail.setAttribute("value", from_email);
+    var subjectInput = document.createElement("input");
+    subjectInput.name = "subject";
+    subjectInput.setAttribute("value", subject);
+    var fromName = document.createElement("input");
+    fromName.name = "from_name";
+    fromName.setAttribute("value", from_name);
+    var message = document.createElement("input");
+    message.name = "message";
+    message.setAttribute("value", givenMessage);
+    form.appendChild(fromEmail);
+    form.appendChild(subjectInput);
+    form.appendChild(fromName);
+    form.appendChild(message);
+    submitForm(form);
+  }
+
   function callCreateApptAPI() {
+    createForm(
+      email,
+      "Appointment Confirmed!",
+      firstName,
+      "Kharizia's Hair has received your appointment and confirmed it within our records. See you soon!"
+    );
+
     var dateObj = selectedDate.$d;
 
     const jsonObj = {

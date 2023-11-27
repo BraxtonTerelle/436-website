@@ -10,6 +10,7 @@ import ErrorPage from "../pages/Error.js";
 import Admin from "../pages/Admin.js";
 
 function App() {
+  document.head.append();
   return (
     <BrowserRouter>
       <Routes>
