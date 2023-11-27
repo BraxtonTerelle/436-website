@@ -7,8 +7,7 @@
     <list default="true" id="4659e43f-852f-4752-be63-9dd5cff91b35" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/APIHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/APIHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/createAppointmentBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/createAppointmentBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Availability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CSC436Group12/backend/Availability.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

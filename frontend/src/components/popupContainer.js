@@ -12,7 +12,7 @@ import { TextField } from "@mui/material";
 import BookButton from "./BookButton.js";
 import ServiceItem from "./ServiceItem";
 import { StaticDateTimePicker } from "@mui/x-date-pickers";
-import UniversalPopup from "../components/UniversalPopup";
+import UniversalPopup from "./UniversalPopup";
 import emailjs from "emailjs-com";
 
 export default function PopupContainer({ active, setActive }) {
@@ -22,6 +22,35 @@ export default function PopupContainer({ active, setActive }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [service, setService] = useState("");
+  const [availabilities, setAvailabilities] = useState([]);
+
+  function getAvailability() {
+    var url = 'http://localhost:8080/getAvailabilities';
+    
+    const date = {
+      month: 0,
+      day: 0,
+      year: 0,
+    };
+
+    fetch(url, {
+      method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(date),
+    }).then((res) => {
+      return res.json();
+    }).then((jsonObj) => {
+      console.log(jsonObj);
+      setAvailabilities(jsonObj);
+    })
+
+
+  }
+
+
 
   const stepLabels = [
     "Choose Service",
@@ -62,6 +91,7 @@ export default function PopupContainer({ active, setActive }) {
     setEmail(event.target.value);
   }
 
+
   function submitForm(form) {
     emailjs
       .sendForm("service_8p8y3vp", "contact_form", form, "-lCn9pWg2EQK_ZcRl")
@@ -94,6 +124,9 @@ export default function PopupContainer({ active, setActive }) {
     form.appendChild(fromName);
     form.appendChild(message);
     submitForm(form);
+
+  function handleServiceChange(event) {
+    setService(event.target.value);
   }
 
   function callCreateApptAPI() {
@@ -177,6 +210,20 @@ export default function PopupContainer({ active, setActive }) {
       slotTime.getTime() < availHoursEnd.getTime();
     return isValid;
   }
+
+  const shouldDisableDateTime = (dateTime) => {
+    return !availabilities.some((range) => {
+      isDateTimeInRange(dateTime, range);
+    })
+  }
+
+  function isDateTimeInRange(dateTime, range) {
+    return (
+      dateTime.getTime() >= range.start.getTime() &&
+      dateTime.getTime() <= range.end.getTime()
+    );
+  }
+
 
   // if the "active" useState variable is true, display the popup. Otherwise display nothing
   return (
@@ -264,9 +311,11 @@ export default function PopupContainer({ active, setActive }) {
                       ampm={false}
                       ampmInClock={false}
                       disablePast={true}
+
                       //maxTime={//maxTime}
                       value={selectedDate}
                       onChange={handleDateChange}
+                      shouldDisableDateTime={shouldDisableDateTime}
                       sx={{
                         marginTop: "40px",
                         marginBottom: "40px",
@@ -365,4 +414,5 @@ export default function PopupContainer({ active, setActive }) {
       </div>
     </UniversalPopup>
   );
+}
 }

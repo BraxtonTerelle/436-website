@@ -23,34 +23,42 @@ public class APIHandler {
     }
     
     public SortedSet<DailyAppointments> setTestingValues(SortedSet<DailyAppointments> d) {
-    	DailyAppointments d1 = new DailyAppointments(new Date(11, 10, 2023));
-    	DailyAppointments d2 = new DailyAppointments(new Date(12, 10, 2023));
-    	DailyAppointments d3 = new DailyAppointments(new Date(11, 20, 2021));
+    	DailyAppointments d1 = new DailyAppointments(new Date(11, 28, 2023));
+    	DailyAppointments d2 = new DailyAppointments(new Date(11, 29, 2023));
+    	DailyAppointments d3 = new DailyAppointments(new Date(11, 30, 2023));
     	
     	Appointment a1 = new Appointment(
-    			new Date(11, 10, 2023), new Time(12, 00), new Time(0, 20), 
-    			new ContactInfo("joe", "Lastname", "joe@email.com", "1234567"));
+    			new Date(11, 28, 2023), new Time(12, 30), new Time(0, 20),
+    			new ContactInfo("Joe", "J.", "JoeJ@email.com", "5551111111"));
     	
     	Appointment a2 = new Appointment(
-    			new Date(11, 10, 2023), new Time(15, 00), new Time(0, 20), 
-    			new ContactInfo("Bob", "Lastname", "bob@email.com", "1234567"));
+    			new Date(11, 28, 2023), new Time(14, 0), new Time(0, 20),
+    			new ContactInfo("Bob", "B.", "BobB@email.com", "5552222222"));
     	
     	Appointment a3 = new Appointment(
-    			new Date(12, 10, 2023), new Time(12, 00), new Time(0, 20), 
-    			new ContactInfo("jim", "Lastname", "jim@email.com", "1234567"));
+    			new Date(11, 29, 2023), new Time(12, 00), new Time(0, 20),
+    			new ContactInfo("Jim", "J.", "JimJ@email.com", "5553333333"));
     	
     	Appointment a4 = new Appointment(
-    			new Date(12, 10, 2023), new Time(15, 00), new Time(0, 20), 
-    			new ContactInfo("rom", "Lastname", "rom@email.com", "1234567"));
+    			new Date(11, 29, 2023), new Time(15, 00), new Time(0, 20),
+    			new ContactInfo("Hank", "H.", "HankH@email.com", "5554444444"));
     	
     	Appointment a5 = new Appointment(
-    			new Date(11, 20, 2021), new Time(12, 00), new Time(0, 20), 
-    			new ContactInfo("han", "Lastname", "han@email.com", "1234567"));
+    			new Date(11, 30, 2023), new Time(12, 00), new Time(0, 20),
+    			new ContactInfo("Kevin", "K.", "KevinK@email.com", "5555555555"));
     	
     	Appointment a6 = new Appointment(
-    			new Date(11, 20, 2021), new Time(15, 00), new Time(0, 20), 
-    			new ContactInfo("bud", "Lastname", "bud@email.com", "1234567"));
-    	
+    			new Date(11, 30, 2023), new Time(15, 00), new Time(0, 20),
+    			new ContactInfo("James", "J.", "JamesJ@email.com", "5556666666"));
+
+        Availability av1 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Tucson);
+        Availability av2 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Phoenix);
+        Availability av3 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Tucson);
+
+        d1.addAvailability(av1);
+        d2.addAvailability(av2);
+        d3.addAvailability(av3);
+
     	d1.addAppointment(a1);
     	d1.addAppointment(a2);
     	d2.addAppointment(a3);
