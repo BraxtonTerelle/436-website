@@ -3,6 +3,7 @@ package com.CSC436Group12.backend;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.SortedSet;
@@ -82,7 +83,7 @@ public class APIHandler {
 
     @PostMapping({"/createAppointment"})
     @ResponseBody
-    public Appointment createAppointment(@RequestBody createAppointmentBody appointmentBody){
+    public ArrayList<Appointment> createAppointment(@RequestBody createAppointmentBody appointmentBody){
         //if dailyAppointments has appointmentBody.getDate() then add appointment to that DailyAppointments
         //else create new DailyAppointments with appointmentBody.getDate() and add appointment to that DailyAppointments
         //return appointment
@@ -91,16 +92,20 @@ public class APIHandler {
             if(dailyAppointment.getDate().compareTo(appointmentBody.getDate()) == 0){
                 added = dailyAppointment.createAppointment(appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
                 if (added) {
-                    return dailyAppointment.getAppointment(appointmentBody.getTime());
+                    ArrayList<Appointment> toReturn = new ArrayList<>();
+                    toReturn.add(dailyAppointment.getAppointment(appointmentBody.getTime()));
+                    return toReturn;
                 } else {
-                    return null;
+                    return new ArrayList<Appointment>();
                 }
             }
         }
         Appointment a = new Appointment(appointmentBody.getDate(), appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo(), appointmentBody.getAddOns());
         dailyAppointments.add(new DailyAppointments(appointmentBody.getDate(), a));
         System.out.println(a.toJSON());
-        return a;
+        ArrayList<Appointment> toReturn = new ArrayList<>();
+        toReturn.add(a);
+        return toReturn;
     }
 
     @PostMapping({"/deleteAppointment"})
