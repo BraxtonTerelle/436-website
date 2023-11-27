@@ -154,48 +154,47 @@ function Admin() {
           month: parseInt(dateArr[0]),
           day: parseInt(dateArr[1]),
           year: parseInt(dateArr[2]),
-        }, 
+        },
         availability: {
           startTime: arr[0],
           endTime: arr[1],
-        }
+        },
       });
     });
 
     // Parse through all arrays and check formatting
-    for (var i = 0; i<obj.length; i++) {
+    for (var i = 0; i < obj.length; i++) {
       addAvailability(obj[i]);
     }
 
-
     // Send availability to backend to be saved
-    
-
   }
 
   function addAvailability(obj) {
     console.log("object to send", obj);
-    var url = 'http://localhost:8080/addAvailability';
+    var url = "http://localhost:8080/addAvailability";
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(obj),
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err);
     })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function splitTimes(value) {
-    var times = value.split('-');
-    var startTimeArr = times[0].split(':');
-    var endTimeArr = times[1].split(':');
+    var times = value.split("-");
+    var startTimeArr = times[0].split(":");
+    var endTimeArr = times[1].split(":");
 
-    var isPmStartTime = startTimeArr[1].toLowerCase().includes('pm');
-    var isPmEndTime = endTimeArr[1].toLowerCase().includes('pm');
+    var isPmStartTime = startTimeArr[1].toLowerCase().includes("pm");
+    var isPmEndTime = endTimeArr[1].toLowerCase().includes("pm");
 
     var startInt = parseInt(startTimeArr[0]);
     if (isPmStartTime) {
@@ -208,20 +207,16 @@ function Admin() {
     var endInt = parseInt(endTimeArr[0]);
 
     var startTimeObject = {
-        
-            hour: startInt,
-            minute: parseInt(startTimeArr[1]),
-        
+      hour: startInt,
+      minute: parseInt(startTimeArr[1]),
     };
 
     var endTimeObject = {
-        
-            hour: endInt,
-            minute: parseInt(endTimeArr[1]),
-        
+      hour: endInt,
+      minute: parseInt(endTimeArr[1]),
     };
     return [startTimeObject, endTimeObject];
-  } 
+  }
 
   function getFormattedDate(readDate) {
     var formattedDate = new Date(readDate);
@@ -390,24 +385,25 @@ function Admin() {
                 onClick={saveAvailability}
               />
               <br></br>
-            <div>
-              <div id="apptsDivContainer">
-            <div id="appointmentsDiv">
-              <button onClick={getAppointments}>Update Appointments List</button>
-              <div id="aptsResDiv">
-                {appointments.map((appointment, index) => (
-                  <AppointmentButton
-                    key={index}
-                    appointment={appointment}
-                    onClick={deleteAppt}
-                  />
-                ))}
+              <div>
+                <div id="apptsDivContainer">
+                  <div id="appointmentsDiv">
+                    <button onClick={getAppointments}>
+                      Update Appointments List
+                    </button>
+                    <div id="aptsResDiv">
+                      {appointments.map((appointment, index) => (
+                        <AppointmentButton
+                          key={index}
+                          appointment={appointment}
+                          onClick={deleteAppt}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-            </div>
-            </div>
-            
           ) : (
             <div
               style={{
@@ -430,9 +426,9 @@ function Admin() {
               <TextField
                 id="loginUser"
                 label="Password"
+                type="password"
                 variant="outlined"
                 value={password}
-                type='password'
                 onChange={(newVal) => {
                   setPassword(newVal.target.value);
                 }}
@@ -482,7 +478,7 @@ function Admin() {
           />
         </div>
       </UniversalPopup>
-      
+
       <Footer color="secondary" />
     </>
   );
