@@ -16,15 +16,17 @@ import UniversalPopup from "./UniversalPopup";
 import emailjs from "emailjs-com";
 
 export default function PopupContainer({ active, setActive }) {
+  //console.log(active);
   const [activeStep, setActiveStep] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [service, setService] = useState("");
-  const [availabilities, setAvailabilities] = useState([]);
+  //const [service, setService] = useState("");
+  //const [availabilities, setAvailabilities] = useState([]);
 
+  /*
   function getAvailability() {
     var url = 'http://localhost:8080/getAvailabilities';
     
@@ -49,6 +51,7 @@ export default function PopupContainer({ active, setActive }) {
 
 
   }
+  */
 
 
 
@@ -94,10 +97,10 @@ export default function PopupContainer({ active, setActive }) {
 
   function submitForm(form) {
     emailjs
-      .sendForm("service_8p8y3vp", "contact_form", form, "-lCn9pWg2EQK_ZcRl")
+      .sendForm("service_5a6c5pr", "contact_form", form, "-lCn9pWg2EQK_ZcRl")
       .then(
         (result) => {
-          alert("Successfully sent email");
+          //alert("Successfully sent email");
         },
         (error) => {
           console.log(error.text);
@@ -124,10 +127,10 @@ export default function PopupContainer({ active, setActive }) {
     form.appendChild(fromName);
     form.appendChild(message);
     submitForm(form);
-
-  function handleServiceChange(event) {
-    setService(event.target.value);
   }
+  //function handleServiceChange(event) {
+  //  setService(event.target.value);
+  //}
 
   function callCreateApptAPI() {
     createForm(
@@ -159,6 +162,7 @@ export default function PopupContainer({ active, setActive }) {
         email: email,
         phoneNumber: phoneNumber,
       },
+      addOns: "random",
     };
 
     var url = "http://localhost:8080/createAppointment";
@@ -171,7 +175,13 @@ export default function PopupContainer({ active, setActive }) {
       body: JSON.stringify(jsonObj),
     })
       .then((res) => {
+        console.log(res);
+
+        if (res.json() === null) {
+          console.log("response is null");
+        }
         res.json();
+        //console.log(res.json());
       })
       .then((jsonRes) => {
         console.log(jsonRes);
@@ -211,11 +221,13 @@ export default function PopupContainer({ active, setActive }) {
     return isValid;
   }
 
+  /*
   const shouldDisableDateTime = (dateTime) => {
     return !availabilities.some((range) => {
       isDateTimeInRange(dateTime, range);
     })
   }
+  
 
   function isDateTimeInRange(dateTime, range) {
     return (
@@ -223,6 +235,7 @@ export default function PopupContainer({ active, setActive }) {
       dateTime.getTime() <= range.end.getTime()
     );
   }
+  */
 
 
   // if the "active" useState variable is true, display the popup. Otherwise display nothing
@@ -315,7 +328,7 @@ export default function PopupContainer({ active, setActive }) {
                       //maxTime={//maxTime}
                       value={selectedDate}
                       onChange={handleDateChange}
-                      shouldDisableDateTime={shouldDisableDateTime}
+                      //shouldDisableDateTime={shouldDisableDateTime}
                       sx={{
                         marginTop: "40px",
                         marginBottom: "40px",
@@ -415,4 +428,4 @@ export default function PopupContainer({ active, setActive }) {
     </UniversalPopup>
   );
 }
-}
+
