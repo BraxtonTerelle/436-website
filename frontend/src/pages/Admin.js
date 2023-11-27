@@ -57,6 +57,41 @@ function Admin() {
       });
   }
 
+  function deleteAppt(appointment) {
+
+    var url = 'http://localhost:8080/deleteAppointment';
+
+    const obj = {
+      date: {
+        month: appointment.date.month,
+        day: appointment.date.day,
+        year: appointment.date.year,
+      },
+      time: {
+        hour: appointment.time.hour,
+        minute: appointment.time.minute,
+      },
+    }
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj),
+    }).then((res) => {
+      return res.text();
+    }).then((text) => {
+      console.log(text);
+      getAppointments();
+      alert("You have successfully deleted this appointment");
+    }).catch((err) => {
+      console.log(err);
+    })
+
+
+  }
+
   function saveAvailability() {
     // If any days are marked as unavailable then clear that day's
     // availability time slots
@@ -319,12 +354,8 @@ function Admin() {
             {appointments.map((appointment, index) => (
               <AppointmentButton
                 key={index}
-                date={appointment.date}
-                time={appointment.time}
-                duration={appointment.duration}
-                contactInfo={appointment.contactInfo}
-                //onClick={handleAppointmentClick}
-                //onDelete={handleDeleteAppointment}
+                appointment={appointment}
+                onClick={deleteAppt}
               />
             ))}
         </div>

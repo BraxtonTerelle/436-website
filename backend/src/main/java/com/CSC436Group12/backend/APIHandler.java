@@ -2,7 +2,12 @@ package com.CSC436Group12.backend;
 
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import java.util.Collections;
+=======
+import java.util.ArrayList;
+import java.util.Iterator;
+>>>>>>> 9745aea (Admin page now has deletable appointment list)
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -97,15 +102,30 @@ public class APIHandler {
     }
 
     @PostMapping({"/deleteAppointment"})
-    public String deleteAppointment(@RequestBody deleteAppointmentBody appointmentBody){
-        for(DailyAppointments dailyAppointment : dailyAppointments){
-            if(dailyAppointment.getDate().compareTo(appointmentBody.getDate()) == 0){
+    public String deleteAppointment(@RequestBody deleteAppointmentBody appointmentBody) {
+        Iterator<DailyAppointments> iterator = dailyAppointments.iterator();
+        String retval = "This appointment does not exist";
+
+        while (iterator.hasNext()) {
+            DailyAppointments dailyAppointment = iterator.next();
+            if (dailyAppointment.getDate().compareTo(appointmentBody.getDate()) == 0) {
                 dailyAppointment.deleteAppointment(appointmentBody.getTime());
-                return "deleted";
+                retval = "deleted";
+                iterator.remove();
             }
         }
-        return "This appointment does not exist";
+
+        System.out.println(retval);
+
+        for (DailyAppointments dailyApts : dailyAppointments) {
+            for (Appointment apt : dailyApts.getApts()) {
+                System.out.println(apt.toJSON());
+            }
+        }
+
+        return retval;
     }
+
 
     @PostMapping("/reserveSlot")
     public String reserveSlot(@RequestBody ReserveBody body) {

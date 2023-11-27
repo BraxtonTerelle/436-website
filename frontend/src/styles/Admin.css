@@ -83,12 +83,14 @@ h1 {
 
 #appointmentsDiv {
   max-width: 600px;
+  max-height: 400px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: white;
+  overflow-y: scroll;
 }
 
 #appointmentsDiv button {
