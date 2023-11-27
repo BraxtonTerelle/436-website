@@ -36,13 +36,16 @@ function Admin() {
 
   const [appointments, setAppointments] = useState([]);
 
+  const [signedIn, setSignedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
     getAppointments();
   }, []);
 
   function getAppointments() {
-
-    var url = 'http://localhost:8080/getAppointments';
+    var url = "http://localhost:8080/getAppointments";
 
     fetch(url)
       .then((res) => {
@@ -58,8 +61,7 @@ function Admin() {
   }
 
   function deleteAppt(appointment) {
-
-    var url = 'http://localhost:8080/deleteAppointment';
+    var url = "http://localhost:8080/deleteAppointment";
 
     const obj = {
       date: {
@@ -71,25 +73,26 @@ function Admin() {
         hour: appointment.time.hour,
         minute: appointment.time.minute,
       },
-    }
+    };
 
     fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(obj),
-    }).then((res) => {
-      return res.text();
-    }).then((text) => {
-      console.log(text);
-      getAppointments();
-      alert("You have successfully deleted this appointment");
-    }).catch((err) => {
-      console.log(err);
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
     })
-
-
+      .then((res) => {
+        return res.text();
+      })
+      .then((text) => {
+        console.log(text);
+        getAppointments();
+        alert("You have successfully deleted this appointment");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function saveAvailability() {
@@ -187,133 +190,174 @@ function Admin() {
 
       <div className="section" id="contentDiv">
         <div id="paddedContainer">
-          <div className="availabilityContainer">
-            <div className="availabilityContent">
-              <div className="weeklyHoursContainer">
-                <h3 style={{ marginLeft: "10px", marginBottom: "20px" }}>
-                  Weekly Hours
-                </h3>
-                <WeeklyHour
-                  name="SUN"
-                  checked={sunCheck}
-                  setChecked={setSunCheck}
-                  availability={sunAvail}
-                  setAvailability={setSunAvail}
-                />
-                <WeeklyHour
-                  name="MON"
-                  checked={monCheck}
-                  setChecked={setMonCheck}
-                  availability={monAvail}
-                  setAvailability={setMonAvail}
-                />
-                <WeeklyHour
-                  name="TUE"
-                  checked={tueCheck}
-                  setChecked={setTueCheck}
-                  availability={tueAvail}
-                  setAvailability={setTueAvail}
-                />
-                <WeeklyHour
-                  name="WED"
-                  checked={wedCheck}
-                  setChecked={setWedCheck}
-                  availability={wedAvail}
-                  setAvailability={setWedAvail}
-                />
-                <WeeklyHour
-                  name="THU"
-                  checked={thuCheck}
-                  setChecked={setThuCheck}
-                  availability={thuAvail}
-                  setAvailability={setThuAvail}
-                />
-                <WeeklyHour
-                  name="FRI"
-                  checked={friCheck}
-                  setChecked={setFriCheck}
-                  availability={friAvail}
-                  setAvailability={setFriAvail}
-                />
-                <WeeklyHour
-                  name="SAT"
-                  checked={satCheck}
-                  setChecked={setSatCheck}
-                  availability={satAvail}
-                  setAvailability={setSatAvail}
-                />
-              </div>
-              <div className="specificHoursContainer">
-                <h3 style={{ marginLeft: "10px", marginBottom: "20px" }}>
-                  Date-specific hours
-                </h3>
-                <p
-                  style={{
-                    marginLeft: "10px",
-                    marginBottom: "20px",
-                    color: "gray",
-                  }}
-                >
-                  Override your availability for specific dates when your hours
-                  differ from your regular weekly hours.
-                </p>
-                <button
-                  onClick={() => {
-                    setShowCalendar(true);
-                    document.body.style.overflowY = "hidden";
-                  }}
-                  className="addSpecificDate"
-                  style={{
-                    borderRadius: "15px",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "10px 15px 10px 15px",
-                    fontSize: "18px",
-                    backgroundColor: "white",
-                    margin: "0 0 20px 10px",
-                  }}
-                >
-                  <AddIcon
-                    style={{ marginRight: "5px" }}
-                    color="black"
-                    fontSize="small"
+          {signedIn ? (
+            <div className="availabilityContainer">
+              <div className="availabilityContent">
+                <div className="weeklyHoursContainer">
+                  <h3 style={{ marginLeft: "10px", marginBottom: "20px" }}>
+                    Weekly Hours
+                  </h3>
+                  <WeeklyHour
+                    name="SUN"
+                    checked={sunCheck}
+                    setChecked={setSunCheck}
+                    availability={sunAvail}
+                    setAvailability={setSunAvail}
+                  />
+                  <WeeklyHour
+                    name="MON"
+                    checked={monCheck}
+                    setChecked={setMonCheck}
+                    availability={monAvail}
+                    setAvailability={setMonAvail}
+                  />
+                  <WeeklyHour
+                    name="TUE"
+                    checked={tueCheck}
+                    setChecked={setTueCheck}
+                    availability={tueAvail}
+                    setAvailability={setTueAvail}
+                  />
+                  <WeeklyHour
+                    name="WED"
+                    checked={wedCheck}
+                    setChecked={setWedCheck}
+                    availability={wedAvail}
+                    setAvailability={setWedAvail}
+                  />
+                  <WeeklyHour
+                    name="THU"
+                    checked={thuCheck}
+                    setChecked={setThuCheck}
+                    availability={thuAvail}
+                    setAvailability={setThuAvail}
+                  />
+                  <WeeklyHour
+                    name="FRI"
+                    checked={friCheck}
+                    setChecked={setFriCheck}
+                    availability={friAvail}
+                    setAvailability={setFriAvail}
+                  />
+                  <WeeklyHour
+                    name="SAT"
+                    checked={satCheck}
+                    setChecked={setSatCheck}
+                    availability={satAvail}
+                    setAvailability={setSatAvail}
+                  />
+                </div>
+                <div className="specificHoursContainer">
+                  <h3 style={{ marginLeft: "10px", marginBottom: "20px" }}>
+                    Date-specific hours
+                  </h3>
+                  <p
+                    style={{
+                      marginLeft: "10px",
+                      marginBottom: "20px",
+                      color: "gray",
+                    }}
                   >
-                    +
-                  </AddIcon>
-                  Add date-specific hours
-                </button>
-                <div className="specificDatesContainer">
-                  {Object.keys(unavail).map((dateKey, index) => (
-                    <UnavailableDate
-                      key={index}
-                      name={dateKey}
-                      availability={unavail[dateKey]}
-                      setAvailability={(newAvail) => {
-                        if (newAvail.length == 0) {
-                          // If we're deleting the last time-slot for a day, just remove
-                          // that day from unavail map
-                          delete unavail[dateKey];
-                        } else {
-                          unavail[dateKey] = newAvail;
-                          // Create copy of unavail and re-assign it
-                          // to force a re-render
-                        }
-                        var unavailCopy = { ...unavail };
-                        setUnavail(unavailCopy);
-                      }}
-                    />
-                  ))}
+                    Override your availability for specific dates when your
+                    hours differ from your regular weekly hours.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setShowCalendar(true);
+                      document.body.style.overflowY = "hidden";
+                    }}
+                    className="addSpecificDate"
+                    style={{
+                      borderRadius: "15px",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 15px 10px 15px",
+                      fontSize: "18px",
+                      backgroundColor: "white",
+                      margin: "0 0 20px 10px",
+                    }}
+                  >
+                    <AddIcon
+                      style={{ marginRight: "5px" }}
+                      color="black"
+                      fontSize="small"
+                    >
+                      +
+                    </AddIcon>
+                    Add date-specific hours
+                  </button>
+                  <div className="specificDatesContainer">
+                    {Object.keys(unavail).map((dateKey, index) => (
+                      <UnavailableDate
+                        key={index}
+                        name={dateKey}
+                        availability={unavail[dateKey]}
+                        setAvailability={(newAvail) => {
+                          if (newAvail.length == 0) {
+                            // If we're deleting the last time-slot for a day, just remove
+                            // that day from unavail map
+                            delete unavail[dateKey];
+                          } else {
+                            unavail[dateKey] = newAvail;
+                            // Create copy of unavail and re-assign it
+                            // to force a re-render
+                          }
+                          var unavailCopy = { ...unavail };
+                          setUnavail(unavailCopy);
+                        }}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
+              <BookButton
+                label="Save Changes"
+                type="primary"
+                onClick={saveAvailability}
+              />
             </div>
-            <BookButton
-              label="Save Changes"
-              type="primary"
-              onClick={saveAvailability}
-            />
-          </div>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <TextField
+                id="loginUser"
+                label="User Name"
+                variant="outlined"
+                value={username}
+                onChange={(newVal) => {
+                  setUsername(newVal.target.value);
+                }}
+                sx={{ marginBottom: "15px", backgroundColor: "white" }}
+              />
+              <TextField
+                id="loginUser"
+                label="Password"
+                variant="outlined"
+                value={password}
+                onChange={(newVal) => {
+                  setPassword(newVal.target.value);
+                }}
+                sx={{ marginBottom: "15px", backgroundColor: "white" }}
+              />
+              <BookButton
+                label="Sign In"
+                type="primary"
+                onClick={() => {
+                  if (username === "admin1" && password === "pass1") {
+                    setSignedIn(true);
+                  }
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
       <UniversalPopup visible={showCalendar}>
@@ -358,8 +402,8 @@ function Admin() {
                 onClick={deleteAppt}
               />
             ))}
+          </div>
         </div>
-      </div>
       </div>
       <Footer color="secondary" />
     </>

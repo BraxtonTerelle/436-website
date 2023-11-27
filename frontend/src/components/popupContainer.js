@@ -12,7 +12,7 @@ import { TextField } from "@mui/material";
 import BookButton from "./BookButton.js";
 import ServiceItem from "./ServiceItem";
 import { StaticDateTimePicker } from "@mui/x-date-pickers";
-import UniversalPopup from "../components/UniversalPopup";
+import UniversalPopup from "./UniversalPopup";
 import emailjs from "emailjs-com";
 
 export default function PopupContainer({ active, setActive }) {
