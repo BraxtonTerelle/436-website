@@ -148,10 +148,6 @@ public class DailyAppointments {
     	return appointments;
     }
     
-    public void addAppointment(Appointment a) {
-    	this.appointments.add(a);
-    }
-
     /**
      * Backup/Testing file writing function.
      * Usage: Create a new file saving the day's appointments.

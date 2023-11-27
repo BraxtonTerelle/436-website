@@ -2,12 +2,9 @@ package com.CSC436Group12.backend;
 
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< HEAD
 import java.util.Collections;
-=======
 import java.util.ArrayList;
 import java.util.Iterator;
->>>>>>> 9745aea (Admin page now has deletable appointment list)
 import java.util.SortedSet;
 import java.util.TreeSet;
 
