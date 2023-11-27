@@ -31,7 +31,7 @@ public class Availability {
         this.endTime = toSet;
     }
 
-    public Location geLocation() {
+    public Location getLocation() {
         return this.location;
     }
 

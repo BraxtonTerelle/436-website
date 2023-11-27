@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -131,11 +132,25 @@ public class DailyAppointments {
      * @param end
      * @param location
      */
-    public void addAvailability(Time start, Time end, Location location) {
+    public boolean addAvailability(Time start, Time end, Location location) {
         Availability toAdd = new Availability(start, end, location);
-        availabilities.add(toAdd);
+        return availabilities.add(toAdd);
+    }
+
+    public boolean addAvailability(Availability toAdd) {
+        return availabilities.add(toAdd);
     }
     
+    public boolean removeAvailability(Availability toRemove) {
+        return availabilities.removeIf((Availability toCompare) -> {
+            return toCompare.getStartTime().compareTo(toRemove.getStartTime()) == 0;
+        });
+    }
+
+    public ArrayList<Availability> getAvailabilities() {
+        return new ArrayList<Availability>(availabilities);
+    }
+
     public String toString() {
     	if (appointments.size() == 0) {
     		return "";

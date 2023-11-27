@@ -130,6 +130,38 @@ public class APIHandler {
         return "Created reservation: " + body.toString();
     }
 
+    @PostMapping("/addAvailability")
+    public String addAvailability(@RequestBody AvailabilityReq body) {
+        for (DailyAppointments day : dailyAppointments) {
+            if (day.getDate().compareTo(body.getDate()) == 0) {
+                boolean returnVal = day.addAvailability(body.getAvailability());
+                if (returnVal) { return "Added"; }
+            }
+        }
+        return "Failed";
+    }
+
+    @PostMapping("/removeAvailability")
+    public String removeAvailability(@RequestBody AvailabilityReq body) {
+        for (DailyAppointments day : dailyAppointments) {
+            if (day.getDate().compareTo(body.getDate()) == 0) {
+                boolean returnVal = day.removeAvailability(body.getAvailability());
+                if (returnVal) { return "Removed"; }
+            }
+        }
+        return "Failed";
+    }
+
+    @PostMapping("/getAvailability")
+    public ArrayList<Availability> getAvailability(@RequestBody Date body) {
+        for (DailyAppointments day : dailyAppointments) {
+            if (day.getDate().compareTo(body) == 0) {
+                return day.getAvailabilities();
+            }
+        }
+        return null;
+    }
+
     @PostMapping("/testBackup")
     public void testBackup() {
         DailyAppointments toSave = new DailyAppointments(new Date(11, 24, 2023));
