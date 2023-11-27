@@ -41,6 +41,18 @@ public class ReserveBody {
     //     this.duration = new Duration(0, 20);
     // }
 
+    public Time getTime() {
+        return this.time;
+    }
+
+    public Time getDuration() {
+        return new Time(this.duration.getHours(), this.duration.getMinutes());
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
     public String toString() {
         return "Appointment Reservation at " + time + ", " + date +  " held for " + duration + ".";
     }

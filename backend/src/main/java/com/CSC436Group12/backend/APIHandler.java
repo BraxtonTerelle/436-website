@@ -86,10 +86,15 @@ public class APIHandler {
         //if dailyAppointments has appointmentBody.getDate() then add appointment to that DailyAppointments
         //else create new DailyAppointments with appointmentBody.getDate() and add appointment to that DailyAppointments
         //return appointment
+        boolean added = false;
         for(DailyAppointments dailyAppointment : dailyAppointments){
             if(dailyAppointment.getDate().compareTo(appointmentBody.getDate()) == 0){
-                dailyAppointment.createAppointment(appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
-                return dailyAppointment.getAppointment(appointmentBody.getTime());
+                added = dailyAppointment.createAppointment(appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
+                if (added) {
+                    return dailyAppointment.getAppointment(appointmentBody.getTime());
+                } else {
+                    return null;
+                }
             }
         }
         Appointment a = new Appointment(appointmentBody.getDate(), appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
@@ -126,8 +131,42 @@ public class APIHandler {
 
     @PostMapping("/reserveSlot")
     public String reserveSlot(@RequestBody ReserveBody body) {
-        System.out.println(body);
-        return "Created reservation: " + body.toString();
+        Appointment tempApt = new Appointment(body.getDate(), body.getTime(), body.getDuration());
+        tempApt.setStatus(AptStatus.HELD);
+
+        boolean addStatus = false;
+        for (DailyAppointments day : dailyAppointments) {
+            if (day.getDate().compareTo(body.getDate()) == 0) {
+                addStatus = day.addAppointment(tempApt);
+                if (!addStatus) {
+                    return "Unable to reserve, time booked/held.";
+                }
+            }
+        }
+        if (!addStatus) {
+            DailyAppointments newDay = new DailyAppointments(body.getDate(), tempApt);
+            addStatus = dailyAppointments.add(newDay);
+        }
+
+        if (!addStatus) { return "Unable to reserve"; }
+        new java.util.Timer().schedule(
+            new java.util.TimerTask() {
+                @Override
+                public void run() {
+                    for (DailyAppointments day : dailyAppointments) {
+                        if (day.getDate().compareTo(body.getDate()) == 0) {
+                            Appointment temp = day.getAppointment(body.getTime());
+                            if (temp != null) {
+                                if (temp.getStatus().equals(AptStatus.HELD)) {
+                                    day.deleteAppointment(body.getTime());
+                                }
+                            }
+                        }
+                    }
+                }
+            }, 60000);
+        
+        return "Held for 1 minute.";
     }
 
     @PostMapping("/addAvailability")

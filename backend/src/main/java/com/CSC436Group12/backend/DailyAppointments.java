@@ -29,6 +29,8 @@ public class DailyAppointments {
         this.appointments = new TreeSet<>((appointment1, appointment2) -> appointment1.getTime().compareTo(appointment2.getTime()));
         this.appointments.add(appointment);
         this.availabilities = new TreeSet<>((av1, av2) -> av1.getStartTime().compareTo(av2.getStartTime()));
+        // temporary
+        availabilities.add(new Availability(new Time(10, 0), new Time(16, 0), Location.Tucson));
     }
 
     public Date getDate() {
