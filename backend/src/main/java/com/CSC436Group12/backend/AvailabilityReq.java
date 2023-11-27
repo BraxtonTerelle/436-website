@@ -1,9 +1,9 @@
 package com.CSC436Group12.backend;
 
-public class AddAvailability {
+public class AvailabilityReq {
     private Date date;
     private Availability availability;
-    public AddAvailability(Date date, Availability availability) {
+    public AvailabilityReq(Date date, Availability availability) {
         this.date = date;
         this.availability = availability;
     }
