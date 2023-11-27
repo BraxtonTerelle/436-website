@@ -1,6 +1,10 @@
 package com.CSC436Group12.backend;
 
-public class Availability {
+import java.io.Serializable;
+
+public class Availability implements Serializable {
+    private static final long serialVersionUID = 2;
+
     public enum Location {
         Pheonix, Tucson
     }
