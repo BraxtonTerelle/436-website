@@ -14,19 +14,63 @@ public class APIHandler {
 
     public APIHandler(){
         dailyAppointments = new TreeSet<>((dailyAppointments1, dailyAppointments2) -> dailyAppointments1.getDate().compareTo(dailyAppointments2.getDate()));
+        dailyAppointments = setTestingValues(dailyAppointments);
+    }
+    
+    public SortedSet<DailyAppointments> setTestingValues(SortedSet<DailyAppointments> d) {
+    	DailyAppointments d1 = new DailyAppointments(new Date(11, 10, 2023));
+    	DailyAppointments d2 = new DailyAppointments(new Date(12, 10, 2023));
+    	DailyAppointments d3 = new DailyAppointments(new Date(11, 20, 2021));
+    	
+    	Appointment a1 = new Appointment(
+    			new Date(11, 10, 2023), new Time(12, 00), new Time(0, 20), 
+    			new ContactInfo("joe", "Lastname", "joe@email.com", "1234567"));
+    	
+    	Appointment a2 = new Appointment(
+    			new Date(11, 10, 2023), new Time(15, 00), new Time(0, 20), 
+    			new ContactInfo("Bob", "Lastname", "bob@email.com", "1234567"));
+    	
+    	Appointment a3 = new Appointment(
+    			new Date(12, 10, 2023), new Time(12, 00), new Time(0, 20), 
+    			new ContactInfo("jim", "Lastname", "jim@email.com", "1234567"));
+    	
+    	Appointment a4 = new Appointment(
+    			new Date(12, 10, 2023), new Time(15, 00), new Time(0, 20), 
+    			new ContactInfo("rom", "Lastname", "rom@email.com", "1234567"));
+    	
+    	Appointment a5 = new Appointment(
+    			new Date(11, 20, 2021), new Time(12, 00), new Time(0, 20), 
+    			new ContactInfo("han", "Lastname", "han@email.com", "1234567"));
+    	
+    	Appointment a6 = new Appointment(
+    			new Date(11, 20, 2021), new Time(15, 00), new Time(0, 20), 
+    			new ContactInfo("bud", "Lastname", "bud@email.com", "1234567"));
+    	
+    	d1.addAppointment(a1);
+    	d1.addAppointment(a2);
+    	d2.addAppointment(a3);
+    	d2.addAppointment(a4);
+    	d3.addAppointment(a5);
+    	d3.addAppointment(a6);
+    	
+    	d.add(d1);
+    	d.add(d2);
+    	d.add(d3);
+    	return d;
     }
 
     @GetMapping({"/getAppointments"})
-    public String getAppointments() {
+    public ArrayList<Appointment> getAppointments() {
     	if (dailyAppointments.size() == 0) {
-    		return "There are no scheduled appointments";
+    		return new ArrayList<Appointment>();
     	}
     	
     	
-    	String retval = "";
+    	ArrayList<Appointment> retval = new ArrayList<Appointment>();
     	for (DailyAppointments dailyApts : dailyAppointments) {
-    		System.out.println(dailyApts);
-    		retval += dailyApts.toString() + "\n";
+    		for (Appointment apt : dailyApts.getApts()) {
+    			retval.add(apt);
+    		}
     	}
     	
         return retval;

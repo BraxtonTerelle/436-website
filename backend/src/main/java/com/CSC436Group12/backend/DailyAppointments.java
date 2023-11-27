@@ -68,6 +68,14 @@ public class DailyAppointments {
     	String s = appointments.first().toJSON();
     	return s;
     }
+    
+    public SortedSet<Appointment> getApts() {
+    	return appointments;
+    }
+    
+    public void addAppointment(Appointment a) {
+    	this.appointments.add(a);
+    }
 
     /**
      * Backup/Testing file writing function.

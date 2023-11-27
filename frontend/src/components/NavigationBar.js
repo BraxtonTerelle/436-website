@@ -24,23 +24,14 @@ function updateNavButtons(buttonName) {
       selectNavButton("homeButton");
       deselectNavButton("servicesButton");
       deselectNavButton("aboutButton");
-      deselectNavButton("appointmentsButton");
       break;
     case "Services":
       selectNavButton("servicesButton");
       deselectNavButton("homeButton");
       deselectNavButton("aboutButton");
-      deselectNavButton("appointmentsButton");
       break;
     case "About":
       selectNavButton("aboutButton");
-      deselectNavButton("servicesButton");
-      deselectNavButton("homeButton");
-      deselectNavButton("appointmentsButton");
-      break;
-    case "Appointments":
-      selectNavButton("appointmentsButton");
-      deselectNavButton("aboutButton");
       deselectNavButton("servicesButton");
       deselectNavButton("homeButton");
       break;
@@ -98,17 +89,6 @@ function NavigationBar(props) {
           }}
         >
           About
-        </button>
-      </Link>
-      <Link to="/appointments">
-        <button
-          id="appointmentsButton"
-          className="navButton"
-          onClick={() => {
-            updateNavButtons("Appointments");
-          }}
-        >
-          Appointments
         </button>
       </Link>
     </div>

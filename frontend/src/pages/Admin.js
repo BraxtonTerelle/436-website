@@ -11,6 +11,8 @@ import UniversalPopup from "../components/UniversalPopup";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import AppointmentButton from "../components/AppointmentButton";
+import "../styles/AppointmentButton.css";
 
 function Admin() {
   const [sunCheck, setSunCheck] = useState(false);
@@ -31,6 +33,29 @@ function Admin() {
 
   const [unavail, setUnavail] = useState({ "11/22/2023": ["9:00am-5:00pm"] });
   const [showCalendar, setShowCalendar] = useState(false);
+
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    getAppointments();
+  }, []);
+
+  function getAppointments() {
+
+    var url = 'http://localhost:8080/getAppointments';
+
+    fetch(url)
+      .then((res) => {
+        return res.json();
+      })
+      .then((jsonObj) => {
+        console.log(jsonObj);
+        setAppointments(jsonObj);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   function saveAvailability() {
     // If any days are marked as unavailable then clear that day's
@@ -287,6 +312,24 @@ function Admin() {
           />
         </div>
       </UniversalPopup>
+      <div id="apptsDivContainer">
+        <div id="appointmentsDiv">
+          <button onClick={getAppointments}>Update Appointments List</button>
+          <div id="aptsResDiv">
+            {appointments.map((appointment, index) => (
+              <AppointmentButton
+                key={index}
+                date={appointment.date}
+                time={appointment.time}
+                duration={appointment.duration}
+                contactInfo={appointment.contactInfo}
+                //onClick={handleAppointmentClick}
+                //onDelete={handleDeleteAppointment}
+              />
+            ))}
+        </div>
+      </div>
+      </div>
       <Footer color="secondary" />
     </>
   );
