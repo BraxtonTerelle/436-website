@@ -1,6 +1,9 @@
 import "../styles/ServiceItem.css";
 import Checkbox from "@mui/material/Checkbox";
+
+
 function ServiceItem(props) {
+  //const [selected, setSelected] = useState(false);
   // This is for the popupContainer when a customer is selecting the types of services they're
   // adding to the appointment shopping card
   if (props.type === "checkbox") {
