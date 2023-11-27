@@ -174,10 +174,14 @@ public class APIHandler {
         for (DailyAppointments day : dailyAppointments) {
             if (day.getDate().compareTo(body.getDate()) == 0) {
                 boolean returnVal = day.addAvailability(body.getAvailability());
-                if (returnVal) { return "Added"; }
+                if (returnVal) { return "Time Added"; }
+                else return "Failed";
             }
         }
-        return "Failed";
+        DailyAppointments toAdd = new DailyAppointments(body.getDate());
+        toAdd.addAvailability(body.getAvailability());
+        dailyAppointments.add(toAdd);
+        return "Day Added";
     }
 
     @PostMapping("/removeAvailability")
