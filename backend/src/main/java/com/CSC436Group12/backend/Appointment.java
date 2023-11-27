@@ -3,7 +3,7 @@ package com.CSC436Group12.backend;
 import java.io.Serializable;
 
 public class Appointment implements Serializable {
-    private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 2;
 
     private Date date;
     private Time time;
@@ -11,7 +11,7 @@ public class Appointment implements Serializable {
     private User user;
     private ContactInfo contactInfo;
 
-    private Boolean completed;
+    private AptStatus status;
 
     public Appointment(Date date, Time time, Time duration){
         this.date = date;
@@ -19,7 +19,7 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = null;
         this.contactInfo = null;
-        this.completed = false;
+        this.status = AptStatus.BOOKED;
     }
 
     public Appointment(Date date, Time time, Time duration, User user){
@@ -28,7 +28,7 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = user;
         this.contactInfo = null;
-        this.completed = false;
+        this.status = AptStatus.BOOKED;
     }
 
     public Appointment(Date date, Time time, Time duration, ContactInfo contactInfo){
@@ -37,7 +37,7 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = null;
         this.contactInfo = contactInfo;
-        this.completed = false;
+        this.status = AptStatus.BOOKED;
     }
 
     public Appointment(Date date, Time time, Time duration, User user, ContactInfo contactInfo){
@@ -46,11 +46,15 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = user;
         this.contactInfo = contactInfo;
-        this.completed = false;
+        this.status = AptStatus.BOOKED;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public void setStatus(AptStatus toSet) {
+        this.status = toSet;
+    }
+
+    public AptStatus getStatus() {
+        return this.status;
     }
 
     public Date getDate() {
@@ -72,6 +76,14 @@ public class Appointment implements Serializable {
     public Time getDuration() { return duration; }
 
     public void setDuration(Time duration) { this.duration = duration; }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User toSet) { 
+        this.user = toSet;
+    }
 
     public ContactInfo getContactInfo() {
         return contactInfo;

@@ -33,6 +33,37 @@ public class Time implements Serializable{
     	this.minute = minute;
     }
 
+    /**
+     * Advances this time forward by the given amount.
+     * Reduces minutes to hours and excess hours past
+     * 24 back.
+     * @param hourPlus hours to increase
+     * @param minutePlus minutes to increase
+     * @return the number of days advanced, if any.
+     */
+    public int increment(int hourPlus, int minutePlus) {
+        this.hour += hourPlus;
+        this.minute += minutePlus;
+
+        this.hour += this.minute / 60;
+        this.minute = this.minute % 60;
+
+        int daysCarried = this.hour / 24;
+        this.hour = this.hour % 24;
+
+        return daysCarried;
+    }
+    /**
+     * Advances forward the calling Time object by
+     * an amount of hr/minutes as given within the
+     * argument Time object.
+     * @param otherTime
+     * @return the number of days advanced, if any.
+     */
+    public int increment(Time otherTime) {
+        return this.increment(otherTime.getHour(), otherTime.getMinute());
+    }
+
     public int compareTo(Time otherTime){
         if(this.hour > otherTime.hour) return 1;
         else if(this.hour < otherTime.hour) return -1;

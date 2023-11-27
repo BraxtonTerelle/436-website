@@ -4,53 +4,117 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import com.CSC436Group12.backend.Availability.Location;
 
 public class DailyAppointments {
 
     private Date date;
 
     private SortedSet<Appointment> appointments;
+    private SortedSet<Availability> availabilities;
 
     public DailyAppointments(Date date){
         this.date = date;
         this.appointments = new TreeSet<>((appointment1, appointment2) -> appointment1.getTime().compareTo(appointment2.getTime()));
+        this.availabilities = new TreeSet<>((av1, av2) -> av1.getStartTime().compareTo(av2.getStartTime()));
     }
 
     public DailyAppointments(Date date, Appointment appointment){
         this.date = date;
         this.appointments = new TreeSet<>((appointment1, appointment2) -> appointment1.getTime().compareTo(appointment2.getTime()));
         this.appointments.add(appointment);
+        this.availabilities = new TreeSet<>((av1, av2) -> av1.getStartTime().compareTo(av2.getStartTime()));
     }
 
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Returns the appointment beginning at the given time,
+     * if it exists.
+     * @param time
+     * @return Appointment if exists, null otherwise.
+     */
     public Appointment getAppointment(Time time){
         for(Appointment appointment : appointments){
             if(appointment.getTime().compareTo(time) == 0){
                 return appointment;
             }
         }
-        return new Appointment(date, time, new Time(0, 0));
+        return null;
     }
 
-    public void createAppointment(Time time, Time duration){
-        appointments.add(new Appointment(date, time, duration));
+    public boolean createAppointment(Time time, Time duration) {
+        Appointment toAdd = new Appointment(date, time, duration);
+        return addAppointment(toAdd);
     }
 
-    public void createAppointment(Time time, Time duration, User user){
-        appointments.add(new Appointment(date, time, duration, user));
+    public boolean createAppointment(Time time, Time duration, User user){
+        Appointment toAdd = new Appointment(date, time, duration, user);
+        return addAppointment(toAdd);
     }
 
-    public void createAppointment(Time time, Time duration, ContactInfo contactInfo){
-        appointments.add(new Appointment(date, time, duration, contactInfo));
+    public boolean createAppointment(Time time, Time duration, ContactInfo contactInfo){
+        Appointment toAdd = new Appointment(date, time, duration, contactInfo);
+        return addAppointment(toAdd);
     }
 
-    public void createAppointment(Time time, Time duration, User user, ContactInfo contactInfo){
-        appointments.add(new Appointment(date, time, duration, user, contactInfo));
+    public boolean createAppointment(Time time, Time duration, User user, ContactInfo contactInfo){
+        Appointment toAdd = new Appointment(date, time, duration, user, contactInfo);
+        return addAppointment(toAdd);
+    }
+
+    /**
+     * Attempts to add a given appointment to the day's list.
+     * Checks various logic before confirming and adding it.
+     * 
+     * Ensures that the appointment is within an available time,
+     * and that it does not overlap (beyond the minute)  with
+     * adjacent appointments.
+     * (ex: 11-11:30 blocks 11:15, but not 11:30-12.)
+     * 
+     * @param toAdd Appointment with AT LEAST time and duration.
+     * @return true if added, false if conflict.
+     */
+    public boolean addAppointment(Appointment toAdd) {
+        // Check for possible slot.
+        boolean timeAvailable = false;
+        for (Availability available : availabilities) {
+            if (available.withinRange(toAdd)) {
+                timeAvailable = true;
+            }
+        }
+
+        Time endTime = new Time(toAdd.getTime().getHour(), toAdd.getTime().getMinute());
+        endTime.increment(toAdd.getDuration());
+
+        // Check for conflicts.
+        Iterator<Appointment> current = appointments.iterator(); // guaranteed to go in increasing order.
+        Time endCompare = new Time(0, 0);
+        while (current.hasNext()) {
+            Appointment toCompare = current.next();
+            // if we pass this slot, end check
+            if (toCompare.getTime().compareTo(endTime) >= 0) {
+                break;
+            }
+            endCompare.setHour(toCompare.getTime().getHour());
+            endCompare.setMinute(toCompare.getTime().getMinute());
+            endCompare.increment(toCompare.getDuration());
+            if (endCompare.compareTo(toAdd.getTime()) > 0) {
+                timeAvailable = false;
+                break;
+            }
+        }
+        // if timeAvailable is still true there were no conflicts.
+        if (!timeAvailable) {
+            return false;
+        }
+        return appointments.add(toAdd);
     }
 
     public void deleteAppointment(Time time){
@@ -59,6 +123,17 @@ public class DailyAppointments {
                 appointments.remove(appointment);
             }
         });
+    }
+
+    /**
+     * Set a given availability for the day.
+     * @param start
+     * @param end
+     * @param location
+     */
+    public void addAvailability(Time start, Time end, Location location) {
+        Availability toAdd = new Availability(start, end, location);
+        availabilities.add(toAdd);
     }
     
     public String toString() {
