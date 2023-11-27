@@ -6,12 +6,14 @@ public class createAppointmentBody {
     private Time time;
     private Time duration;
     private ContactInfo contactInfo;
+    private String addOns;
 
-    public createAppointmentBody(Date date, Time time, Time duration, ContactInfo contactInfo){
+    public createAppointmentBody(Date date, Time time, Time duration, ContactInfo contactInfo, String addOns){
         this.date = date;
         this.time = time;
         this.duration = duration;
         this.contactInfo = contactInfo;
+        this.addOns = addOns;
     }
 
     public Date getDate() {
@@ -45,5 +47,9 @@ public class createAppointmentBody {
     public void setContactInfo(ContactInfo contactInfo) {
         this.contactInfo = contactInfo;
     }
+
+    public String getAddOns() { return addOns; }
+
+    public void setAddOns(String addOns) { this.addOns = addOns; }
 
 }

@@ -10,7 +10,7 @@ public class Appointment implements Serializable {
     private Time duration;
     private User user;
     private ContactInfo contactInfo;
-
+    private String addOns;
     private AptStatus status;
 
     public Appointment(Date date, Time time, Time duration){
@@ -19,6 +19,7 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = null;
         this.contactInfo = null;
+        this.addOns = "";
         this.status = AptStatus.BOOKED;
     }
 
@@ -28,6 +29,7 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = user;
         this.contactInfo = null;
+        this.addOns = "";
         this.status = AptStatus.BOOKED;
     }
 
@@ -37,6 +39,7 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = null;
         this.contactInfo = contactInfo;
+        this.addOns = "";
         this.status = AptStatus.BOOKED;
     }
 
@@ -46,6 +49,17 @@ public class Appointment implements Serializable {
         this.duration = duration;
         this.user = user;
         this.contactInfo = contactInfo;
+        this.addOns = "";
+        this.status = AptStatus.BOOKED;
+    }
+
+    public Appointment(Date date, Time time, Time duration, ContactInfo contactInfo, String addOns){
+        this.date = date;
+        this.time = time;
+        this.duration = duration;
+        this.user = null;
+        this.contactInfo = contactInfo;
+        this.addOns = addOns;
         this.status = AptStatus.BOOKED;
     }
 

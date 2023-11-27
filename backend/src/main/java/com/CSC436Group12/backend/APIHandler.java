@@ -97,7 +97,7 @@ public class APIHandler {
                 }
             }
         }
-        Appointment a = new Appointment(appointmentBody.getDate(), appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo());
+        Appointment a = new Appointment(appointmentBody.getDate(), appointmentBody.getTime(), appointmentBody.getDuration(), appointmentBody.getContactInfo(), appointmentBody.getAddOns());
         dailyAppointments.add(new DailyAppointments(appointmentBody.getDate(), a));
         System.out.println(a.toJSON());
         return a;
