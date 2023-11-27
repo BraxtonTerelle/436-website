@@ -14,7 +14,7 @@ function About() {
 
   function submitForm(form) {
     emailjs
-      .sendForm("service_8p8y3vp", "contact_form", form, "-lCn9pWg2EQK_ZcRl")
+      .sendForm("service_5a6c5pr", "contact_form", form, "-lCn9pWg2EQK_ZcRl")
       .then(
         (result) => {
           alert("Successfully sent email");
