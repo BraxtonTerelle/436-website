@@ -23,9 +23,13 @@ public class APIHandler {
     }
     
     public SortedSet<DailyAppointments> setTestingValues(SortedSet<DailyAppointments> d) {
-    	DailyAppointments d1 = new DailyAppointments(new Date(11, 28, 2023));
-    	DailyAppointments d2 = new DailyAppointments(new Date(11, 29, 2023));
-    	DailyAppointments d3 = new DailyAppointments(new Date(11, 30, 2023));
+    	Date date1 = new Date(11, 28, 2023);
+    	Date date2 = new Date(11, 29, 2023);
+    	Date date3 = new Date(11, 30, 2023);
+    	
+    	DailyAppointments d1 = new DailyAppointments(date1);
+    	DailyAppointments d2 = new DailyAppointments(date2);
+    	DailyAppointments d3 = new DailyAppointments(date3);
     	
     	Appointment a1 = new Appointment(
     			new Date(11, 28, 2023), new Time(12, 30), new Time(0, 20),
@@ -51,9 +55,9 @@ public class APIHandler {
     			new Date(11, 30, 2023), new Time(15, 00), new Time(0, 20),
     			new ContactInfo("James", "J.", "JamesJ@email.com", "5556666666"));
 
-        Availability av1 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Tucson);
-        Availability av2 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Phoenix);
-        Availability av3 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Tucson);
+        Availability av1 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Tucson, date1);
+        Availability av2 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Phoenix, date2);
+        Availability av3 = new Availability(new Time(10, 0), new Time(16, 0), Availability.Location.Tucson, date3);
 
         d1.addAvailability(av1);
         d2.addAvailability(av2);
@@ -216,6 +220,23 @@ public class APIHandler {
             }
         }
         return null;
+    }
+    
+    @GetMapping({"/getAvailabilities"})
+    public ArrayList<Availability> getAvailabilities() {
+    	if (dailyAppointments.size() == 0) {
+    		return new ArrayList<Availability>();
+    	}
+    	
+    	
+    	ArrayList<Availability> retval = new ArrayList<Availability>();
+    	for (DailyAppointments day : dailyAppointments) {
+    		for (Availability avail : day.getAvailabilities()) {
+    			retval.add(avail);
+    		}
+    	}
+    	
+        return retval;
     }
 
     @PostMapping("/testBackup")

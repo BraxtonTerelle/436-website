@@ -7,52 +7,83 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import { StepLabel } from "@mui/material";
 import StepContent from "@mui/material/StepContent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import BookButton from "./BookButton.js";
 import ServiceItem from "./ServiceItem";
-import { StaticDateTimePicker } from "@mui/x-date-pickers";
 import UniversalPopup from "./UniversalPopup";
 import emailjs from "emailjs-com";
+import dayjs from "dayjs";
+import { DigitalClock, DateCalendar } from '@mui/x-date-pickers';
 
 export default function PopupContainer({ active, setActive }) {
-  //console.log(active);
   const [activeStep, setActiveStep] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  //const [service, setService] = useState("");
-  //const [availabilities, setAvailabilities] = useState([]);
-
-  /*
-  function getAvailability() {
+  const [service, setService] = useState("");
+  const [availabilities, setAvailabilities] = useState([]);
+  const [curAvail, setCurAvail] = useState(null);
+  
+  function getAvailabilities() {
     var url = 'http://localhost:8080/getAvailabilities';
-    
-    const date = {
-      month: 0,
-      day: 0,
-      year: 0,
-    };
 
-    fetch(url, {
-      method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(date),
-    }).then((res) => {
+    fetch(url).then((res) => {
       return res.json();
     }).then((jsonObj) => {
       console.log(jsonObj);
       setAvailabilities(jsonObj);
+    }).catch((err) => {
+      console.log(err);
     })
-
-
   }
-  */
 
+  function getAvailability(date) {
+    var url = 'http://localhost:8080/getAvailability';
+
+    const dateObj = {
+      month: date.$M + 1,
+      day: date.$D,
+      year: date.$y,
+    }
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dateObj),
+    }).then((res) => {
+      return res.json();
+    }).then((obj) => {
+      //console.log(obj);
+      setCurAvail(obj);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  useEffect(() => {
+    getAvailabilities();
+  }, []);
+  
+
+  const shouldDisableTime = (time) => {
+    if (!selectedDate || !curAvail) {
+      return true;
+    }
+
+    getAvailability(selectedDate);
+    const startTime = (curAvail[0].startTime.hour * 100) + curAvail[0].startTime.minute;
+    const endTime = (curAvail[0].endTime.hour * 100) + curAvail[0].endTime.minute;
+    const curTime = (time.$H * 100) + time.$m;
+
+    return (
+      (curTime < startTime) || (curTime > endTime)
+    );
+  }
 
 
   const stepLabels = [
@@ -76,6 +107,7 @@ export default function PopupContainer({ active, setActive }) {
 
   function handleDateChange(date) {
     setSelectedDate(date);
+    getAvailability(date);
   }
 
   function handlePhoneChange(event) {
@@ -128,9 +160,6 @@ export default function PopupContainer({ active, setActive }) {
     form.appendChild(message);
     submitForm(form);
   }
-  //function handleServiceChange(event) {
-  //  setService(event.target.value);
-  //}
 
   function callCreateApptAPI() {
     createForm(
@@ -175,13 +204,9 @@ export default function PopupContainer({ active, setActive }) {
       body: JSON.stringify(jsonObj),
     })
       .then((res) => {
-        console.log(res);
-
-        if (res.json() === null) {
-          console.log("response is null");
+        if (res.ok) {
+          return res.json();
         }
-        res.json();
-        //console.log(res.json());
       })
       .then((jsonRes) => {
         console.log(jsonRes);
@@ -220,22 +245,6 @@ export default function PopupContainer({ active, setActive }) {
       slotTime.getTime() < availHoursEnd.getTime();
     return isValid;
   }
-
-  /*
-  const shouldDisableDateTime = (dateTime) => {
-    return !availabilities.some((range) => {
-      isDateTimeInRange(dateTime, range);
-    })
-  }
-  
-
-  function isDateTimeInRange(dateTime, range) {
-    return (
-      dateTime.getTime() >= range.start.getTime() &&
-      dateTime.getTime() <= range.end.getTime()
-    );
-  }
-  */
 
 
   // if the "active" useState variable is true, display the popup. Otherwise display nothing
@@ -320,15 +329,10 @@ export default function PopupContainer({ active, setActive }) {
               <StepContent className="servicesPopupContainer">
                 <div className="stepContentContainer">
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <StaticDateTimePicker
-                      ampm={false}
-                      ampmInClock={false}
+                    <DateCalendar
                       disablePast={true}
-
-                      //maxTime={//maxTime}
                       value={selectedDate}
                       onChange={handleDateChange}
-                      //shouldDisableDateTime={shouldDisableDateTime}
                       sx={{
                         marginTop: "40px",
                         marginBottom: "40px",
@@ -340,6 +344,15 @@ export default function PopupContainer({ active, setActive }) {
                         },
                       }}
                     />
+                    <DigitalClock
+                      ampm={false}
+                      value={selectedTime}
+                      //maxTime={{hour: 7, minute: 0}}
+                      //minTime={{hour: 20, minute: 0}}
+                      onChange={setSelectedTime}
+                      shouldDisableTime={(time) => shouldDisableTime(time)}
+                    >
+                    </DigitalClock>
                   </LocalizationProvider>
                 </div>
               </StepContent>

@@ -53,7 +53,7 @@ public class DailyAppointmentsTest {
     @Test
     void testSaveAndLoad() {
         DailyAppointments toSave = new DailyAppointments(new Date(11, 24, 2023));
-        toSave.addAvailability(new Time(11, 0), new Time(20, 0), Location.Pheonix);
+        toSave.addAvailability(new Time(11, 0), new Time(20, 0), Location.Phoenix);
         toSave.createAppointment(new Time(11, 30), new Time(0, 30));
         toSave.createAppointment(new Time(15, 0), new Time(1, 0));
         assertTrue(toSave.writeAppointments("testA"));

@@ -342,6 +342,7 @@ function Admin() {
                 label="Password"
                 variant="outlined"
                 value={password}
+                type='password'
                 onChange={(newVal) => {
                   setPassword(newVal.target.value);
                 }}

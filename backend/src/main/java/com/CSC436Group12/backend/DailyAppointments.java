@@ -30,7 +30,7 @@ public class DailyAppointments {
         this.appointments.add(appointment);
         this.availabilities = new TreeSet<>((av1, av2) -> av1.getStartTime().compareTo(av2.getStartTime()));
         // temporary
-        availabilities.add(new Availability(new Time(10, 0), new Time(16, 0), Location.Tucson));
+        availabilities.add(new Availability(new Time(10, 0), new Time(16, 0), Location.Tucson, date));
     }
 
     public Date getDate() {
@@ -135,7 +135,7 @@ public class DailyAppointments {
      * @param location
      */
     public boolean addAvailability(Time start, Time end, Location location) {
-        Availability toAdd = new Availability(start, end, location);
+        Availability toAdd = new Availability(start, end, location, this.date);
         return availabilities.add(toAdd);
     }
 

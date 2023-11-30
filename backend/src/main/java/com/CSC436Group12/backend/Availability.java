@@ -9,14 +9,16 @@ public class Availability implements Serializable {
         Phoenix, Tucson
     }
 
+    private Date date;
     private Time startTime;
     private Time endTime;
     private Location location;
 
-    public Availability(Time startTime, Time endTime, Location location) {
+    public Availability(Time startTime, Time endTime, Location location, Date date) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
+        this.date = date;
     }
 
     public Time getStartTime() {
@@ -41,6 +43,14 @@ public class Availability implements Serializable {
 
     public void setLocation(Location toSet) { 
         this.location = toSet;
+    }
+    
+    public Date getDate() {
+    	return this.date;
+    }
+    
+    public void setDate(Date date) {
+    	this.date = date;
     }
 
     /**
