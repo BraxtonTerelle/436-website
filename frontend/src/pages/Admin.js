@@ -31,7 +31,7 @@ function Admin() {
   const [friAvail, setFriAvail] = useState(["9:00am-5:00pm"]);
   const [satAvail, setSatAvail] = useState(["9:00am-5:00pm"]);
 
-  const [unavail, setUnavail] = useState({ "11/22/2023": ["9:00am-5:00pm"] });
+  const [unavail, setUnavail] = useState([]);
   const [showCalendar, setShowCalendar] = useState(false);
 
   const [appointments, setAppointments] = useState([]);
@@ -144,12 +144,84 @@ function Admin() {
       "\n"
     );
 
-    console.log(unavail);
+    var obj = [];
+    Object.keys(unavail).forEach((date) => {
+      const timeRanges = unavail[date];
+      const dateArr = date.split("/");
+      var arr = splitTimes(timeRanges.toString());
+      obj.push({
+        date: {
+          month: parseInt(dateArr[0]),
+          day: parseInt(dateArr[1]),
+          year: parseInt(dateArr[2]),
+        }, 
+        availability: {
+          startTime: arr[0],
+          endTime: arr[1],
+        }
+      });
+    });
 
     // Parse through all arrays and check formatting
+    for (var i = 0; i<obj.length; i++) {
+      addAvailability(obj[i]);
+    }
+
 
     // Send availability to backend to be saved
+    
+
   }
+
+  function addAvailability(obj) {
+    console.log("object to send", obj);
+    var url = 'http://localhost:8080/addAvailability';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  function splitTimes(value) {
+    var times = value.split('-');
+    var startTimeArr = times[0].split(':');
+    var endTimeArr = times[1].split(':');
+
+    var isPmStartTime = startTimeArr[1].toLowerCase().includes('pm');
+    var isPmEndTime = endTimeArr[1].toLowerCase().includes('pm');
+
+    var startInt = parseInt(startTimeArr[0]);
+    if (isPmStartTime) {
+      startInt += 12;
+    }
+    if (isPmEndTime) {
+      endInt += 12;
+    }
+
+    var endInt = parseInt(endTimeArr[0]);
+
+    var startTimeObject = {
+        
+            hour: startInt,
+            minute: parseInt(startTimeArr[1]),
+        
+    };
+
+    var endTimeObject = {
+        
+            hour: endInt,
+            minute: parseInt(endTimeArr[1]),
+        
+    };
+    return [startTimeObject, endTimeObject];
+  } 
 
   function getFormattedDate(readDate) {
     var formattedDate = new Date(readDate);
@@ -317,7 +389,25 @@ function Admin() {
                 type="primary"
                 onClick={saveAvailability}
               />
+              <br></br>
+            <div>
+              <div id="apptsDivContainer">
+            <div id="appointmentsDiv">
+              <button onClick={getAppointments}>Update Appointments List</button>
+              <div id="aptsResDiv">
+                {appointments.map((appointment, index) => (
+                  <AppointmentButton
+                    key={index}
+                    appointment={appointment}
+                    onClick={deleteAppt}
+                  />
+                ))}
+              </div>
             </div>
+          </div>
+            </div>
+            </div>
+            
           ) : (
             <div
               style={{
@@ -392,20 +482,7 @@ function Admin() {
           />
         </div>
       </UniversalPopup>
-      <div id="apptsDivContainer">
-        <div id="appointmentsDiv">
-          <button onClick={getAppointments}>Update Appointments List</button>
-          <div id="aptsResDiv">
-            {appointments.map((appointment, index) => (
-              <AppointmentButton
-                key={index}
-                appointment={appointment}
-                onClick={deleteAppt}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      
       <Footer color="secondary" />
     </>
   );

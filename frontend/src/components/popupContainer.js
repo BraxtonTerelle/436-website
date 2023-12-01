@@ -5,7 +5,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import IconButton from "@mui/material/IconButton";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
-import { StepLabel } from "@mui/material";
+import { Menu, MenuItem, StepLabel } from "@mui/material";
 import StepContent from "@mui/material/StepContent";
 import { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
@@ -15,6 +15,9 @@ import UniversalPopup from "./UniversalPopup";
 import emailjs from "emailjs-com";
 import dayjs from "dayjs";
 import { DigitalClock, DateCalendar } from '@mui/x-date-pickers';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 export default function PopupContainer({ active, setActive }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -27,6 +30,7 @@ export default function PopupContainer({ active, setActive }) {
   const [service, setService] = useState("");
   const [availabilities, setAvailabilities] = useState([]);
   const [curAvail, setCurAvail] = useState(null);
+  const [location, setLocation] = useState("Tucson");
   
   function getAvailabilities() {
     var url = 'http://localhost:8080/getAvailabilities';
@@ -34,7 +38,7 @@ export default function PopupContainer({ active, setActive }) {
     fetch(url).then((res) => {
       return res.json();
     }).then((jsonObj) => {
-      console.log(jsonObj);
+      //console.log(jsonObj);
       setAvailabilities(jsonObj);
     }).catch((err) => {
       console.log(err);
@@ -91,6 +95,11 @@ export default function PopupContainer({ active, setActive }) {
     "Choose Date and Time",
     "Enter Contact Information",
   ];
+
+  function handleLocationChange(event) {
+    setLocation(event.target.value);
+  };
+
   function handleBack() {
     setActiveStep(activeStep - 1);
   }
@@ -215,7 +224,7 @@ export default function PopupContainer({ active, setActive }) {
         console.log(err);
       });
 
-    console.log(jsonObj);
+    //console.log(jsonObj);
 
     alert("Your Booking is Confirmed");
     setActive(false);
@@ -329,6 +338,20 @@ export default function PopupContainer({ active, setActive }) {
               <StepContent className="servicesPopupContainer">
                 <div className="stepContentContainer">
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <FormControl
+                      style={{width: '5vw', marginRight: '11vw'}}
+                    >
+                      <Select
+                        labelId="location-label"
+                        id="location"
+                        value={location}
+                        onChange={handleLocationChange}
+                        style={{width: '10vw'}}
+                      >
+                        <MenuItem value={"Tucson"}>Tucson</MenuItem>
+                        <MenuItem value={"Phoenix"}>Phoenix</MenuItem>
+                      </Select>
+                    </FormControl>
                     <DateCalendar
                       disablePast={true}
                       value={selectedDate}

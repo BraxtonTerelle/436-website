@@ -197,12 +197,14 @@ public class APIHandler {
         }
         DailyAppointments toAdd = new DailyAppointments(body.getDate());
         toAdd.addAvailability(body.getAvailability());
+        System.out.println(body.getAvailability());
         dailyAppointments.add(toAdd);
         return "Day Added";
     }
 
     @PostMapping("/removeAvailability")
     public String removeAvailability(@RequestBody AvailabilityReq body) {
+    	System.out.println("call body: " + body);
         for (DailyAppointments day : dailyAppointments) {
             if (day.getDate().compareTo(body.getDate()) == 0) {
                 boolean returnVal = day.removeAvailability(body.getAvailability());

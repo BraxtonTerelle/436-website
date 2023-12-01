@@ -66,5 +66,9 @@ public class Availability implements Serializable {
         
         return withinRange(toCompare.getTime()) && withinRange(apptEnd);
     }
+    
+    public String toString() {
+    	return date + "   -   " + startTime + " - " + endTime; 
+    }
 
 }
